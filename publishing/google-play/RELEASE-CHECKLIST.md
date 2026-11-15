@@ -25,7 +25,7 @@ Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on *
 
 ## Before submitting
 
-1. Publish the prepared source and `PRIVACY.md` to the public repository. Open the privacy URL while signed out and confirm it renders as a readable webpage. The app also includes the full offline policy under Visual options → Privacy & support. Check `PUBLICATION.md` for publication status.
+1. The prepared public source and `PRIVACY.md` have been published; see `PUBLICATION.md`. Before submission, open the privacy URL while signed out and confirm it still renders as a readable webpage. The app also includes the full offline policy under Visual options → Privacy & support.
 2. Create the app in Play Console with default language English (United States). Choose **free or paid**, distribution countries and intended age groups. These are publisher decisions and have not been guessed. Complete account identity, contact, trader and payment declarations as applicable.
 3. Use Google Play App Signing. For this first release, choose Google's generated **app signing key**; the provided bundle is signed with a separate **upload key**. Supply its public certificate if the Console requests it. Never upload the private key or password to GitHub or attach them to the store listing.
 4. Upload the AAB to **internal testing** first. Use the supplied descriptions and graphic files. Check the device catalog, automated pre-launch report and the real widget workflow on the Play-delivered build. The bundle targets API 36, meeting the current new-app target requirement. [Target API rules](https://support.google.com/googleplay/android-developer/answer/11926878).
