@@ -1,6 +1,6 @@
 {
   "source": "Isolated AOSP Android 15 emulator; no phone data or imported images",
-  "appVersion": "0.6.4",
+  "appVersion": "0.6.5",
   "apps": [
     {
       "component": "com.android.dialer\/.main.impl.MainActivity",
@@ -79,7 +79,7 @@
     },
     {
       "component": "dev.iconnavigator\/.EditorActivity",
-      "label": "Icon Navigator",
+      "label": "App Grid & Thumb Select Widget",
       "artwork": "PackageManager original icon"
     }
   ]

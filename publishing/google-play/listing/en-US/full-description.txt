@@ -1,6 +1,6 @@
 Make room on your home screen and keep frequent apps close to your thumb.
 
-Icon Navigator gives you two configurable Android widgets: Grid and Thumb icon selector.
+App Grid & Thumb Select Widget gives you two configurable Android widgets: Grid and Thumb icon selector.
 
 FIT MORE APPS INTO YOUR HOME SCREEN
 Choose your own rows and columns. Put 9, 12 or 16 apps into a compact grid, or turn a grid into a horizontal or vertical strip. Widget rows and columns are independent of your launcher's grid.
@@ -18,6 +18,6 @@ EVERY ICON OPENS ITS APP
 Tap a widget icon to launch its assigned activity directly. Icons fit the available widget size without adding pages or pagination. Settings explain when a selection needs more positions or when icons shrink to fit.
 
 LOCAL AND OFFLINE
-No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. Icon Navigator does not request internet access.
+No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. App Grid & Thumb Select Widget does not request internet access.
 
 After installation, add Grid or Thumb icon selector from your launcher's widget picker, choose your apps, and save. Your launcher controls placement and resizing. Android 12 or newer is required. Choose a size and spacing that work for your hand and phone.

@@ -3,7 +3,7 @@
 <rect width="1024" height="500" fill="#101510"/>
 <ellipse cx="805" cy="270" rx="380" ry="335" fill="url(#glow)"/>
 <g font-family="Liberation Sans, sans-serif">
-<text x="64" y="83" fill="#b9f97b" font-size="22" font-weight="700" letter-spacing="2">ICON NAVIGATOR</text>
+<text x="64" y="83" fill="#b9f97b" font-size="20" font-weight="700" letter-spacing="1">APP GRID &amp; THUMB SELECT WIDGET</text>
 <text x="60" y="184" fill="#f1f6ed" font-size="60" font-weight="700">More apps.</text>
 <text x="60" y="254" fill="#f1f6ed" font-size="60" font-weight="700">Less reaching.</text>
 <text x="64" y="326" fill="#b5c7b6" font-size="23">Compact grids and thumb controls.</text>

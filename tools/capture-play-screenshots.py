@@ -247,7 +247,7 @@ def package():
     (DEST / "manifest.json").write_text(json.dumps({"appVersion": version, "screenshots": records}, indent=2) + "\n")
     (DEST / "index.html").write_text('''<!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Icon Navigator · Google Play materials</title>
+<title>App Grid &amp; Thumb Select Widget · Google Play materials</title>
 <style>
 body{margin:0;padding:32px;background:#101610;color:#eaf1e5;font:16px system-ui,sans-serif}
 h1{font-size:32px;margin:0 0 12px}p{color:#b5c4af;line-height:1.6;max-width:760px}
@@ -255,7 +255,7 @@ a{color:#bef779}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(2
 figure{margin:0}img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid #344032}
 figcaption{padding:12px 0;line-height:1.5}figcaption p{font-size:14px;margin:8px 0}header{margin-bottom:28px}
 .brand{display:flex;align-items:center;gap:20px}.brand img{width:88px;border:0;border-radius:0}.feature{max-width:1024px;margin:24px 0}.feature img{border-radius:0}nav{display:flex;flex-wrap:wrap;gap:20px;margin:20px 0}h2{font-size:24px;margin:36px 0 20px}
-</style><header><div class="brand"><img src="graphics/app-icon-512.png" alt="Icon Navigator app icon"><h1>Icon Navigator</h1></div>
+</style><header><div class="brand"><img src="graphics/app-icon-512.png" alt="App Grid &amp; Thumb Select Widget app icon"><h1>App Grid &amp; Thumb Select Widget</h1></div>
 <p>More apps in less space. Keep frequent apps close to your chosen corner.<br>
 Compare 9, 12, and 16 apps in a compact Grid, or place a Thumb selector low on the screen.</p>
 <p>Make it yours with optional labels, light or dark backgrounds, gradients, grayscale icons, borders, opacity, and independent layer sizes.</p>

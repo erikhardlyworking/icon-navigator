@@ -8,6 +8,8 @@ Offer exactly two new widget entries: **Grid** and **Thumb icon selector**. Grid
 
 ## Behavior that must hold
 
+- Public app name is **App Grid & Thumb Select Widget**. Keep package/provider identities stable for updates. Privacy & support offers Read policy online and More apps by this developer (Hardly Working's Google Play developer ID 6256987868491351341), with Play Store preference/browser fallback. Do not restore the email button.
+
 - Keep Basic settings concise: heading and labeled controls only, without explanatory paragraphs, preview-dimension copy, or a Default app names switch. Retain meaningful validation warnings above the controls.
 - Basic settings includes **Thumb center height (%)** (0 bottom, 50 middle, 100 top), **Thumb reach**, with **Layer spacing (%)** (25–150) in Fit widget mode, and **Show icon labels** with exactly **Follow defaults / Yes / No**. The dropdown previews and saves a per-widget policy; it never changes the stored app default. Retain previously saved defaults and migrate older labels as explicit overrides.
 - Basic settings also offers **Thumb reach: Fit widget / Set inner and outer reach**. Fit widget retains Layer spacing. Custom mode replaces it with ordered **Inner reach (%)** (1–99) / **Outer reach (%)** (2–100) controls, side by side, for radial distances from the thumb center. Use circular arcs, and never normalize edited endpoints back to widget edges. Older records without a mode stay in Fit widget. Fresh thumb profiles use custom reach 34/95%, center height 17%, requested icon size 47 dp and layer scales 150/121/105/100%. Preserve saved settings across upgrades. Explicit custom reach may reserve empty space; Fit widget adds no top/left inset.

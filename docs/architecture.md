@@ -1,4 +1,4 @@
-# Architecture — version 0.6.4
+# Architecture — version 0.6.5
 
 Native Java 17, framework Activities/Views and RemoteViews. Min SDK 31; compile/target SDK 36. AGP 8.11.1, Gradle 8.14, no production libraries. JUnit/AndroidX dependencies are test-only. Scoped launcher queries find current-profile apps; document-picker images are copied into private storage.
 
@@ -46,7 +46,7 @@ Labels, gradients, image overlays, wash/collage, borders, and appearance presets
 
 ## Privacy, Back navigation and release separation
 
-The manifest requests no permissions, including INTERNET. Cloud/device-transfer backup is disabled. PrivacyActivity displays a packaged offline policy and optional external browser/email links, accessible from Visual options. The public Markdown policy supplies the same content. The adaptive launcher icon has a monochrome resource for Android 13+.
+The manifest requests no permissions, including INTERNET. Cloud/device-transfer backup is disabled. PrivacyActivity displays a packaged offline policy and optional external browser/Google Play links, accessible from Visual options. The public Markdown policy supplies the same content. The adaptive launcher icon has a monochrome resource for Android 13+. Manifest/editor branding uses the app_name resource, App Grid & Thumb Select Widget. More apps by this developer uses the verified Google Play developer page (6256987868491351341), tries com.android.vending first, then retries the HTTPS link without a package for browser handling. No email action remains; app/package/provider identities remain unchanged.
 
 API 33+ uses the framework OnBackInvokedDispatcher, with the existing discard-confirmation behavior. The deprecated onBackPressed override remains only as the API 31/32 fallback; its narrow GestureBackNavigation lint suppression documents that purpose.
 

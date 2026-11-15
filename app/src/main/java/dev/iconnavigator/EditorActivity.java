@@ -111,7 +111,7 @@ public final class EditorActivity extends Activity {
             v.setPadding(bars.left, bars.top, bars.right, bars.bottom); return insets;
         });
         LinearLayout header = row(); header.setPadding(dp(20), dp(6), dp(16), 0);
-        weighted(header, text("ICON NAVIGATOR", 13, ACCENT));
+        weighted(header, text(getString(R.string.app_name).toUpperCase(Locale.ROOT), 13, ACCENT));
         if (!configuring) header.addView(button(widgetId == 0 ? "New widget ▾" : "Widget " + widgetId + " ▾", this::chooseWidget));
         root.addView(header);
         LinearLayout steps = row(); steps.setPadding(dp(12), 0, dp(12), 0); stepButtons.clear();
@@ -587,7 +587,7 @@ public final class EditorActivity extends Activity {
         if (config.icons.isEmpty()) { return; }
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
         if (!manager.isRequestPinAppWidgetSupported()) {
-            new AlertDialog.Builder(this).setMessage("Save your draft, then long-press your home screen and choose Widgets → Icon Navigator.")
+            new AlertDialog.Builder(this).setMessage("Save your draft, then long-press your home screen and choose Widgets → " + getString(R.string.app_name) + ".")
                     .setPositiveButton("OK", null).show(); return;
         }
         store.save(0, config);

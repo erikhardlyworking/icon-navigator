@@ -1,22 +1,23 @@
 # First Google Play release
 
-Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on **15 November 2026**. Package **dev.iconnavigator**, version **0.6.4 (12)**, Android 12+ (min 31), target **36**. These are upload materials; no Play Console release has been submitted.
+Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on **15 November 2026**. Package **dev.iconnavigator**, version **0.6.5 (13)**, Android 12+ (min 31), target **36**. These are upload materials; no Play Console release has been submitted.
 
 ## Files to upload
 
 | Play Console field | File or value |
 | --- | --- |
-| App name | `listing/en-US/title.txt` — Icon Navigator |
+| App name | `listing/en-US/title.txt` — App Grid & Thumb Select Widget |
 | Short description | `listing/en-US/short-description.txt` |
 | Full description | `listing/en-US/full-description.txt` |
 | Release notes | `listing/en-US/release-notes.txt` |
 | App icon | `graphics/app-icon-512.png` — 512 × 512 RGBA PNG |
 | Feature graphic | `graphics/feature-graphic-1024x500.png` — 1024 × 500 RGB PNG |
 | Phone screenshots | All eight `phone/*.png`, in numbered order — 1080 × 1920 RGB |
-| App bundle | `release/icon-navigator-0.6.4.aab` — signed with the private upload key |
+| App bundle | `release/icon-navigator-0.6.5.aab` — signed with the private upload key |
 | Upload certificate, if requested | `release/upload-certificate.pem` — public certificate only |
 | Category | App → Personalization |
 | Developer | Hardly Working |
+| More apps developer link | https://play.google.com/store/apps/dev?id=6256987868491351341 |
 | Support email | workinghardlyforyou@gmail.com |
 | Website | https://github.com/erikhardlyworking/icon-navigator |
 | Privacy URL | https://github.com/erikhardlyworking/icon-navigator/blob/main/PRIVACY.md |

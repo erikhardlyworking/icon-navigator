@@ -1,13 +1,14 @@
-# Validation — version 0.6.4
+# Validation — version 0.6.5
 
-Verified on 2026-11-15 using JDK 17, Gradle 8.14, Android SDK 36, and isolated Android 15 / API 35 emulator **emulator-5580** (1080 × 1920, 420 dpi). Version code **12**.
+Verified on 2026-11-15 using JDK 17, Gradle 8.14, Android SDK 36, and isolated Android 15 / API 35 emulator **emulator-5580** (1080 × 1920, 420 dpi). Version code **13**.
 
 | Check | Result |
 | --- | --- |
 | Debug APK and Android test APK builds | Passed |
 | JVM unit tests | 29 passed |
 | Android integration/UI tests | 28 passed |
-| Android lint | 0 errors, 14 warnings |
+| Android lint | 0 errors, 12 warnings |
+| Public name and developer link | 30-character title matches launcher/editor/Play copy; email button removed; actual developer-button click opens correct ID in emulator browser fallback |
 | Two offered entries and six compatibility entries | Eight providers bound; only Grid/Thumb lack hide_from_picker |
 | Inner/outer reach | Independent radial endpoints; ordered controls; preview, preset, recreation and Save persistence; schema 6 keeps Fit widget |
 | Saved handedness and grip | Left/right, center height, layer spacing, and edge inset round-trip independently |
@@ -55,18 +56,20 @@ Use an explicit isolated emulator serial, never the user's phone. Binding tests 
 
 ## Phone installation and limits
 
-A Samsung **SM-S938B**, Android 17 / API 37, received **0.6.4 (12)** on **2026-11-15** through an authorized compatible `adb -s PHONE_SERIAL install -r`. Installation succeeded and package version verification confirmed 0.6.4 (12). App data, preferences and existing widget configurations were preserved. Automated suites and capture configurations stayed on the isolated emulator. This is installation verification, not a complete API 37 UI test pass.
+A Samsung **SM-S938B**, Android 17 / API 37, received **0.6.5 (13)** on **2026-11-15** through an authorized compatible `adb -s PHONE_SERIAL install -r`. Installation succeeded and package version verification confirmed 0.6.5 (13). App data, preferences and existing widget configurations were preserved. Automated suites and capture configurations stayed on the isolated emulator. This is installation verification, not a complete API 37 UI test pass.
 
 There is no large fixed thumb minimum. The new entry requests 2 × 3 launcher cells with a 40 dp minimum resize hint; geometry fits all nonempty configurations to actual bounds. Small widgets can have small icons/targets, and labels hide below 34 dp. Actual comfort, Samsung placement/resizing behavior, Android 12, large fonts, TalkBack, other launchers, custom artwork providers, and large-collection performance on physical devices still need hands-on coverage. Launcher insets and whether the launcher honors hide_from_picker are host-controlled.
 
-The 14 lint warnings concern Gradle version, API 33 Back manifest opt-in on min 31, custom-view construction/draw allocation, unused/obsolete icon resources, English programmatic strings and intentional physical left/right placement. There are no lint errors. A narrow GestureBackNavigation suppression keeps only the API 31/32 onBackPressed fallback; API 33+ uses the framework dispatcher. No production dependency was added.
+The 12 lint warnings concern Gradle version, API 33 Back manifest opt-in on min 31, custom-view construction/draw allocation, unused/obsolete icon resources, English programmatic strings and intentional physical left/right placement. There are no lint errors. A narrow GestureBackNavigation suppression keeps only the API 31/32 onBackPressed fallback; API 33+ uses the framework dispatcher. No production dependency was added.
 
-The required four Gradle checks and release bundle build passed for 0.6.4. All **29 JVM** and **28 Android** tests passed. A previous 0.6.3 run observed an existing transient resize-callback assertion; its full repeat passed. Current integration coverage is on API 35, with target SDK 36; a full API 36/37 runtime suite and Play's pre-launch report remain release-stage checks.
+The required four Gradle checks and release bundle build passed for 0.6.5. All **29 JVM** and **28 Android** tests passed. A previous 0.6.3 run observed an existing transient resize-callback assertion; its full repeat passed. Current integration coverage is on API 35, with target SDK 36; a full API 36/37 runtime suite and Play's pre-launch report remain release-stage checks.
+
+The renamed Privacy & support screen was also opened on the isolated emulator. Its visible buttons are Read policy online, More apps by this developer and Back to settings; no email button remains. Clicking More apps launched the HTTPS developer URL with ID **6256987868491351341** in the emulator's browser, exercising the fallback when Google Play is unavailable. The URL matches both the publisher link in the public Rainline listing and the existing tide app. Play Store routing itself still needs a store-equipped device check. Public and offline policy content were compared after the rename.
 
 ## Screenshots
 
-The current [Google Play materials](../publishing/google-play/README.md) contain eight real 0.6.4 captures at 1080 × 1920, 24-bit RGB PNG. The first three compare four ordinary shortcuts with 9/12/16 widget apps in an equal 2 × 2 Launcher3 footprint. They show optional labels, Light and transparent styles. Image 4 shows 13 stock-icon apps using the current factory thumb geometry, transparent on plain black, low/right with no ordinary shortcuts or dock. It uses a debug-only real Android AppWidgetHost at 250 × 300 dp. Forest/grayscale/border styling appears on a customized 12-app left selector. A Dark 8-app strip, actual icon-color choices, and independent layer-size sliders complete the set.
+The current [Google Play materials](../publishing/google-play/README.md) contain eight real 0.6.5 captures at 1080 × 1920, 24-bit RGB PNG. The first three compare four ordinary shortcuts with 9/12/16 widget apps in an equal 2 × 2 Launcher3 footprint. They show optional labels, Light and transparent styles. Image 4 shows 13 stock-icon apps using the current factory thumb geometry, transparent on plain black, low/right with no ordinary shortcuts or dock. It uses a debug-only real Android AppWidgetHost at 250 × 300 dp. Forest/grayscale/border styling appears on a customized 12-app left selector. A Dark 8-app strip, actual icon-color choices, and independent layer-size sliders complete the set.
 
-All sample artwork comes from original AOSP/Fossify app icons and Icon Navigator's packaged icon; no personal artwork or screenshots are used. Four hash-pinned official Fossify release APKs are emulator fixtures, never production dependencies. The opt-in capture runner refuses phones. Capture assertions check exact app counts, real hosts, compact bounds and low placement, with no ordinary shortcuts in image 4. PNG dimensions/modes, distinct checksums and archive integrity are checked; the ordinary test runner is restored afterward.
+All sample artwork comes from original AOSP/Fossify app icons and App Grid & Thumb Select Widget's packaged icon; no personal artwork or screenshots are used. Four hash-pinned official Fossify release APKs are emulator fixtures, never production dependencies. The opt-in capture runner refuses phones. Capture assertions check exact app counts, real hosts, compact bounds and low placement, with no ordinary shortcuts in image 4. PNG dimensions/modes, distinct checksums and archive integrity are checked; the ordinary test runner is restored afterward.
 
 The 512 × 512 RGBA store icon matches the adaptive launcher icon. The 1024 × 500 RGB feature graphic is original vector artwork based on production thumb geometry. The public source and kit use an explicit allowlist excluding private signing material, local paths, device identifiers, build outputs and historical personal screenshots. The signed release AAB targets API 36; signature/ZIP verification and absence of debug capture/test classes are checked. The release checksum is in `publishing/google-play/release/release-manifest.json`.

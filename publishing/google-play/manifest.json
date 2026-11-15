@@ -1,5 +1,5 @@
 {
-  "appVersion": "0.6.4",
+  "appVersion": "0.6.5",
   "screenshots": [
     {
       "file": "phone/01-grid-9.png",
@@ -8,7 +8,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Compare four ordinary shortcuts with nine widget apps in equal 2 \u00d7 2 launcher footprints. App names are enabled on this transparent Grid.",
-      "sha256": "c7c85461d3fd1c423f1b6f379b194c86ef2cfda074922bd81c10113996641e12"
+      "sha256": "a08fa12192aafed64d79521f719ccbeed3e65af87b7a6e99813d44f513311eef"
     },
     {
       "file": "phone/02-grid-12.png",
@@ -17,7 +17,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Twelve apps in a 3 \u00d7 4 grid, still using only a 2 \u00d7 2 launcher footprint. The Light preset adds an adjustable pale background with rounded corners.",
-      "sha256": "0fc3496292bfeeb321ea7c47755d229c6557f103542deddca56fec566f2609a2"
+      "sha256": "bbd49d7b5885dd9a3920d2648470094876c6a3bf9f975929fb92641a8ed5011f"
     },
     {
       "file": "phone/03-grid-16.png",
@@ -26,7 +26,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Sixteen distinct apps in the same 2 \u00d7 2 launcher footprint. Rows and columns are independent of the launcher's grid.",
-      "sha256": "c2a60d0fa51a3bc8fe2e1c149238295ac03be46ce3221c168aa8d1bf606c53bc"
+      "sha256": "32a3c34e634853d45ec7769a8da650945e44d969ec366878f45375953713fbd4"
     },
     {
       "file": "phone/04-thumb-right.png",
@@ -44,7 +44,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "A customized 12-app selector in the lower left. Original icons use the Grayscale option over a Forest background with a subtle border.",
-      "sha256": "e736c637bc640b3ec77318549c87b9e079548e2886979754ce66809be6bc125c"
+      "sha256": "72cbc5b3eac0d2a7e0e6e3ebe508c5f52497215f513a2883747e7878b5662954"
     },
     {
       "file": "phone/06-grid-strip.png",
@@ -62,7 +62,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "The actual Visual options screen shows all three icon-color choices while its live preview displays the selected gradient background.",
-      "sha256": "970d2628d02597f0bdd4125fc76e2b35a51c7a87b39aa299b830fae2732ab207"
+      "sha256": "b2995526a73e156823ffa7551b465271d306898554384f4be53f9acf16849443"
     },
     {
       "file": "phone/08-layer-sizes.png",
@@ -71,7 +71,7 @@
       "height": 1920,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Adjust layer sizes independently: 80%, 100%, and 115%. The live preview retains all 12 apps, their order, and the actual compact widget dimensions.",
-      "sha256": "ab54dba66ae2befae707957e63ed3bd8c92cefadf91085a8f875ce13c1f78d5c"
+      "sha256": "35aa34c1efdf2604a733692d31dbb460072db3a79a428e9e44e7d40ecb619057"
     }
   ]
 }

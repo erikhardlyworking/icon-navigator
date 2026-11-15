@@ -1,8 +1,12 @@
-# Product specification — version 0.6.4
+# Product specification — version 0.6.5
 
 ## Current request, 2026-11-15
 
 Offer **Grid** and **Thumb icon selector**. Grid rows and columns can form a strip. A thumb widget can switch between right and left in settings. Never show pagination on the widget. Fit spacing and artwork to the actual dimensions; settings warn about assignment overflow or small icons. This supersedes the seven-entry picker and adaptive thumb capacity in version 0.4.1.
+
+## Name and external links
+
+The public name is **App Grid & Thumb Select Widget** (30 characters). The package and existing provider identities stay `dev.iconnavigator`. Privacy & support retains the offline policy and Read policy online, and replaces the email button with **More apps by this developer**, opening Hardly Working's Google Play page (developer ID 6256987868491351341), with browser fallback when the Play Store is unavailable. Support contact remains in the policy and Google Play listing.
 
 ## Grip and label controls
 

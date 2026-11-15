@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import zipfile
+from xml.etree import ElementTree
 from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -38,6 +39,8 @@ for name,size,mode in [('app-icon-512.png',(512,512),'RGBA'),('feature-graphic-1
     with Image.open(DEST/'graphics'/name) as image:assert image.size==size and image.mode==mode,name
 assert (DEST/'graphics/app-icon-512.png').stat().st_size<=1024*1024
 listing=json.loads((DEST/'store-listing.json').read_text())
+app_name=ElementTree.parse(ROOT/'app/src/main/res/values/strings.xml').find("string[@name='app_name']").text
+assert listing['title']==app_name,(listing['title'],app_name)
 for key,limit in [('title',30),('shortDescription',80),('fullDescription',4000)]:assert len(listing[key])<=limit,key
 release=json.loads((DEST/'release/release-manifest.json').read_text())
 assert (release['versionName'],release['versionCode'],release['targetSdk'])==(version,code,36)

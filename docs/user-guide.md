@@ -1,6 +1,6 @@
 # Configure a widget
 
-Long-press your home screen, open **Widgets**, and find **Icon Navigator**. Choose **Grid** or **Thumb icon selector**. You can also open the app, choose a type for a new draft, save, then choose **Add widget**.
+Long-press your home screen, open **Widgets**, and find **App Grid & Thumb Select Widget**. Choose **Grid** or **Thumb icon selector**. You can also open the app, choose a type for a new draft, save, then choose **Add widget**.
 
 Old alternate Grid and left/right entries are retained for existing widgets and marked hidden. Some launchers may still list them.
 
@@ -61,8 +61,8 @@ Custom icon artwork keeps its aspect ratio. Imported background photos are cente
 
 Every foreground app icon on a saved widget opens its assigned activity directly. Decorative backgrounds have no actions. Use the top widget selector to edit another instance; each keeps independent settings.
 
-Version 0.6.4 retains older widget bindings, counts, handedness, artwork, and assignments. Missing layer scales become 100%. Older label settings remain explicit overrides, and absent grip controls retain the previous corner position and spacing. Old page settings are ignored. Removed experimental shapes still migrate to Grid. An ordinary compatible update preserves data.
+Version 0.6.5 retains older widget bindings, counts, handedness, artwork, and assignments. Missing layer scales become 100%. Older label settings remain explicit overrides, and absent grip controls retain the previous corner position and spacing. Old page settings are ignored. Removed experimental shapes still migrate to Grid. An ordinary compatible update preserves data.
 
-Open **Privacy & support** at the bottom of Visual options to read the offline policy or open the policy/support links in another app. Icon Navigator works without an account, ads, analytics, or internet permission.
+Open **Privacy & support** at the bottom of Visual options to read the offline policy or open the policy link and **More apps by this developer** in another app. The developer button prefers Google Play and falls back to a browser; there is no email button. App Grid & Thumb Select Widget works without an account, ads, analytics, or internet permission.
 
 Android 12+ is required. Thumb reach depends on hand size and placement; [the simulation study](thumb-layout-study.md) verifies geometry rather than comfort for every hand.

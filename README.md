@@ -1,4 +1,4 @@
-# Icon Navigator
+# App Grid & Thumb Select Widget
 
 An Android widget for launching apps from a compact grid or comfortable thumb arcs. Android 12 or newer.
 
@@ -27,7 +27,7 @@ Use JDK 17 and Android SDK Platform 36 (Build Tools 35.0.0), with `ANDROID_HOME`
 adb -s YOUR_DEVICE_SERIAL install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Version **0.6.4**, version code **12**, target SDK **36**. APK: `app/build/outputs/apk/debug/app-debug.apk`. The wrapper verifies its Gradle distribution checksum.
+Version **0.6.5**, version code **13**, target SDK **36**. APK: `app/build/outputs/apk/debug/app-debug.apk`. The wrapper verifies its Gradle distribution checksum.
 
 Fresh thumb widgets start with custom inner/outer reach **34/95%**, center height **17%**, requested icon size **47 dp**, and layer scales **150/121/105/100%**. Pick your own apps; none are preselected. Existing widgets and saved drafts retain their settings. Grid keeps its transparent, label-free 3 × 4 default.
 

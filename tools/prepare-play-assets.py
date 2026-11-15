@@ -99,7 +99,7 @@ feature='''<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" vie
 <rect width="1024" height="500" fill="#101510"/>
 <ellipse cx="805" cy="270" rx="380" ry="335" fill="url(#glow)"/>
 <g font-family="Liberation Sans, sans-serif">
-<text x="64" y="83" fill="#b9f97b" font-size="22" font-weight="700" letter-spacing="2">ICON NAVIGATOR</text>
+<text x="64" y="83" fill="#b9f97b" font-size="20" font-weight="700" letter-spacing="1">APP GRID &amp; THUMB SELECT WIDGET</text>
 <text x="60" y="184" fill="#f1f6ed" font-size="60" font-weight="700">More apps.</text>
 <text x="60" y="254" fill="#f1f6ed" font-size="60" font-weight="700">Less reaching.</text>
 <text x="64" y="326" fill="#b5c7b6" font-size="23">Compact grids and thumb controls.</text>
@@ -114,11 +114,11 @@ for source,name,size,mode in [('app-icon.svg','app-icon-512.png','512x512','PNG3
         assert image.mode==('RGBA' if mode=='PNG32' else 'RGB')
 assert (GRAPHICS/'app-icon-512.png').stat().st_size<1024*1024
 
-title='Icon Navigator'
+title='App Grid & Thumb Select Widget'
 short='More apps in less space, with compact grids and controls for your thumb'
 full='''Make room on your home screen and keep frequent apps close to your thumb.
 
-Icon Navigator gives you two configurable Android widgets: Grid and Thumb icon selector.
+App Grid & Thumb Select Widget gives you two configurable Android widgets: Grid and Thumb icon selector.
 
 FIT MORE APPS INTO YOUR HOME SCREEN
 Choose your own rows and columns. Put 9, 12 or 16 apps into a compact grid, or turn a grid into a horizontal or vertical strip. Widget rows and columns are independent of your launcher's grid.
@@ -136,7 +136,7 @@ EVERY ICON OPENS ITS APP
 Tap a widget icon to launch its assigned activity directly. Icons fit the available widget size without adding pages or pagination. Settings explain when a selection needs more positions or when icons shrink to fit.
 
 LOCAL AND OFFLINE
-No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. Icon Navigator does not request internet access.
+No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. App Grid & Thumb Select Widget does not request internet access.
 
 After installation, add Grid or Thumb icon selector from your launcher's widget picker, choose your apps, and save. Your launcher controls placement and resizing. Android 12 or newer is required. Choose a size and spacing that work for your hand and phone.'''
 notes='''First Google Play release.
@@ -149,6 +149,7 @@ for name,text in [('title.txt',title),('short-description.txt',short),('full-des
 metadata={'applicationId':'dev.iconnavigator','publisher':'Hardly Working','supportEmail':'workinghardlyforyou@gmail.com',
           'language':'en-US','category':'PERSONALIZATION','website':'https://github.com/erikhardlyworking/icon-navigator',
           'privacyPolicyUrl':'https://github.com/erikhardlyworking/icon-navigator/blob/main/PRIVACY.md',
+          'developerPageUrl':'https://play.google.com/store/apps/dev?id=6256987868491351341',
           'title':title,'shortDescription':short,'fullDescription':full,'releaseNotes':notes,
           'pricing':'Choose in Play Console before first publication','targetAudience':'Choose in Play Console for the intended audience'}
 (DEST/'store-listing.json').write_text(json.dumps(metadata,indent=2)+'\n')

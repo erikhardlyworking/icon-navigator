@@ -50,7 +50,7 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
     };
     private static final String[] LABELS = {
         "Phone", "Messages", "Camera", "Gallery", "Clock", "Calendar", "Contacts", "Files",
-        "Calculator", "Notes", "Music", "Recorder", "Settings", "Search", "Browser", "Icon Navigator"
+        "Calculator", "Notes", "Music", "Recorder", "Settings", "Search", "Browser", "App Grid & Thumb Select Widget"
     };
     @Override public void onCreate(Bundle arguments) { args=arguments; super.onCreate(arguments); start(); }
     @Override public void onStart() {

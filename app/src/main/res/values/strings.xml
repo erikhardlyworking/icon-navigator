@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">Icon Navigator</string>
+    <string name="app_name">App Grid &amp; Thumb Select Widget</string>
+    <string name="privacy_support_title">Privacy &amp; support</string>
+    <string name="read_policy_online">Read policy online</string>
+    <string name="more_apps_by_developer">More apps by this developer</string>
+    <string name="back_to_settings">Back to settings</string>
+    <string name="no_link_app">No app is available to open this link.</string>
+    <string name="developer_page_url" translatable="false">https://play.google.com/store/apps/dev?id=6256987868491351341</string>
     <string name="widget_description">Launch apps in a grid, a row, or a column.</string>
     <string name="thumb_description">Custom thumb layers, mirrored for either hand.</string>
     <string name="configure">Choose apps</string>
