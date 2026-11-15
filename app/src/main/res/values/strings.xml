@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Icon Navigator</string>
+    <string name="widget_description">Launch apps in a grid, a row, or a column.</string>
+    <string name="thumb_description">Custom thumb layers, mirrored for either hand.</string>
+    <string name="configure">Choose apps</string>
+</resources>

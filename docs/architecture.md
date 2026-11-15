@@ -1,0 +1,53 @@
+# Architecture — version 0.6.4
+
+Native Java 17, framework Activities/Views and RemoteViews. Min SDK 31; compile/target SDK 36. AGP 8.11.1, Gradle 8.14, no production libraries. JUnit/AndroidX dependencies are test-only. Scoped launcher queries find current-profile apps; document-picker images are copied into private storage.
+
+## Providers and persistence
+
+NavigatorWidget is the visible **Grid** provider and remains the original component. ThumbWidget is the visible **Thumb icon selector**. The six older alternate Grid/thumb components stay registered with `hide_from_picker`; they inherit the same rendering lifecycle. Android describes this as a host hint, so launcher compliance varies. [AppWidgetProviderInfo](https://developer.android.com/reference/android/appwidget/AppWidgetProviderInfo#WIDGET_FEATURE_HIDE_FROM_PICKER).
+
+WidgetConfig.Type retains compatibility identities for reading existing data and enumerating all eight components. `offeredTypes()` exposes only GRID_COMPACT and THUMB. Pin requests canonicalize to these two entries. WidgetProviders enforces the bound family while retaining a stored thumb hand; provider enforcement must not reset a right/left setting on load.
+
+ConfigStore JSON schema 7 adds thumbCustomReach, thumbInnerReach and thumbOuterReach. Missing custom mode is false, preserving schema 6 geometry; endpoints default to 25/100%. Normalize Inner to 1–99% and Outer to Inner+1 through 100%. It also stores per-layer scales, thumbCenterHeight, thumbLayerSpacing, thumbEdgeInset, useDefaultLabels, label override, and a draft default-label snapshot alongside geometry, apps, and appearance. Missing scales become 100%; existing layer counts remain unchanged. Legacy page flags/indices are ignored. All assignments remain stored, including an older over-capacity configuration. First-occurrence package deduplication retains original artwork/identity/order. SharedPreferences are not destructively reset by migration.
+
+The existing `default_labels` preference is retained for compatibility and read by configs following defaults; the editor does not expose or write a separate default switch. `showLabels()` resolves the widget override versus that retained default. Missing policy metadata in old records with a labels field becomes an explicit override. Bundle JSON retains the per-widget draft, and recreation/selection of Follow defaults reads the current preference. Save updates only the current widget/draft and never rewrites the app default.
+
+Fresh configurations differ from decoded legacy records: a missing preference creates the current factory profile, while decoding missing JSON fields explicitly retains legacy center/spacing/mode/scales. New thumb profiles use 17% center height, custom 34/95% reach, 47 dp requested artwork and 150/121/105/100% layer scales. No packages are preselected. Selecting Thumb from a new Grid draft supplies the thumb icon-size default without changing saved widgets or drafts. Grid remains 40 dp, 3 × 4 and transparent.
+
+## Geometry
+
+`LayoutEngine.frame` is shared by rendering, editor preview, validation, and simulation. Grid capacity remains rows × columns. Thumb capacity is exactly the requested layer total. The ignored legacy page argument always yields the first positions; no resizing operation changes capacity or assignment indices.
+
+In **Fit widget** mode, a thumb design uses symmetric polar angles and unit collision spacing to establish its arc pattern. Only populated layers participate, and the last populated ring uses its actual app count. There is no reserved footprint for missing apps. Before normalization, layer-spacing percent scales each radial offset from the innermost radius. Grip height rotates all points by atan2(height, 100 − height). A zero-height/100%-spacing fast path preserves default geometry exactly. The rotation is applied after unit-ring construction, allowing points above and below a raised grip without invalidating the original quadrant collision construction. Actual target collision checks still run after fitting.
+
+`fitAxis` finds the largest affine stretch whose actual artwork/label bounds fit each axis, then shifts the occupied edge to the requested outer inset. This removes hidden top/left margins. A configurable side-edge inset reserves space at the thumb side before fitting, capped at 75% of available width; mirroring automatically moves it to the other side. Right/left mirroring changes x only. A single icon starts at the outer top edge and honors grip height through a direct vertical position. Layer scales and individual overrides establish requested sizes, capped at 48 dp; legacy exaggeration remains an additional size variation.
+
+Fitting attempts requested size and spacing first, then binary-searches a smaller spacing multiplier. If zero spacing cannot fit, it binary-searches one common artwork multiplier, preserving relative layer/individual sizes and all app assignments. Pairwise tile-bound checks prevent overlap. Targets track the actual fitted artwork/label bounds, with no 48 dp target or 32 dp icon floor. Labels hide below 34 dp instead of imposing a minimum size. `Frame` reports `iconScale` and `spacingScale` for settings/simulation. It has no minimum-size rejection.
+
+## Custom reach geometry
+
+Custom mode bypasses the legacy spacing/affine normalization. Raw unit rings retain their angles and proportional radial progression, rotated around the selected grip. The grip is inset by side distance and half the largest target, at the selected proportion of usable height. A full-radius ray envelope computes the largest circle fitting all bounds **independently of the edited endpoints**. Radii interpolate between the selected endpoints; a single populated ring uses Inner. Endpoint snapping avoids floating-point drift. A shared fitting strategy tightens padding before artwork and checks bounds/collisions. Circular angles/radial ratios survive resizing and hands mirror exactly.
+
+## Editor and validation
+
+EditorActivity owns one draft and persistent preview above the scroll area. SetupFlow tracks the selected view and validates nonempty app selection plus sufficient capacity. The preview uses actual bound-widget dimensions rather than enlarging them to an artificial minimum. A visible warning survives all three views; only assignment overflow disables Save. Automatic shrinking and hidden small labels produce nonblocking notices.
+
+Basic settings contains only its heading and labeled controls: family for new drafts, Show icon labels (Follow defaults / Yes / No), then Grid rows/columns or thumb side, center height, reach mode, and counts. Fit widget shows Layer spacing; custom mode shows two native SeekBars for Inner/Outer reach. Their ranges update without crossing and refresh the existing preview mid-drag. Selecting custom reach scrolls these controls into view beneath the pinned preview. Visual options contains layer scales; the redundant Thumb spacing / side-edge-distance controls are removed. Stored side insets remain supported by decoding and rendering. Explanatory Basic paragraphs, the dimensions paragraph, and the separate default-label switch are removed; validation warnings remain outside the scrolling controls. Bundle state retains the draft, view, and scroll positions. Inline expanders reveal controls after layout. Drag reorder refreshes through a posted callback, preventing detachment during touch handling. List actions remain alternatives.
+
+## Rendering
+
+RemoteViews contain only backdrop, foreground icon container, and empty target. Pagination XML and navigation PendingIntents are removed. There is no reserved control strip or column, and no preview swipe navigation. Legacy PAGE broadcasts have no navigation handler.
+
+Each foreground ImageView launches its assigned activity with an explicit activity PendingIntent. Backdrops have no listener. Only an empty selection offers Choose apps. Small nonempty widgets retain all configured foreground app targets. Up to four host-supplied sizes receive responsive snapshots; each uses the same assignment counts/order and arc pattern, with spacing and artwork fitted to its dimensions.
+
+IconRenderer preserves source proportions with 64/128/256/512-pixel source buckets, filtered sampling, FIT_CENTER tiles, and a 12 MiB byte-accounted LRU cache. A responsive variant reserves at most one quarter-screen of pixels, capped at 600,000: 65% for foreground, 25% for backdrop, 10% headroom. Bitmaps use `asShared()` to avoid inline Binder pixel copies. Across four variants the budget stays below Android's 1.5-screen widget limit. [Widget bitmap limit](https://developer.android.com/reference/android/appwidget/AppWidgetManager#updateAppWidget(int[],%20android.widget.RemoteViews)).
+
+Labels, gradients, image overlays, wash/collage, borders, and appearance presets retain the previous rendering boundaries. Foreground color effects do not recolor user-selected photos/gradients. The launcher owns placement, physical dimensions, and home-screen gestures.
+
+## Privacy, Back navigation and release separation
+
+The manifest requests no permissions, including INTERNET. Cloud/device-transfer backup is disabled. PrivacyActivity displays a packaged offline policy and optional external browser/email links, accessible from Visual options. The public Markdown policy supplies the same content. The adaptive launcher icon has a monochrome resource for Android 13+.
+
+API 33+ uses the framework OnBackInvokedDispatcher, with the existing discard-confirmation behavior. The deprecated onBackPressed override remains only as the API 31/32 fallback; its narrow GestureBackNavigation lint suppression documents that purpose.
+
+The dock-free screenshot host exists only in the debug source set. Captures use actual RemoteViews and emulator app icons. The signed release bundle is checked for absence of that host and instrumentation/test classes. Upload signing material is ignored under `.private/play-signing`; the public source export and store kit exclude keys and passwords.

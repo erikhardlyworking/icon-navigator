@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+    <application android:label="Icon Navigator" android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme" android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true" android:enableOnBackInvokedCallback="true">
+        <activity android:name=".PrivacyActivity" android:exported="false" />
+        <activity android:name=".EditorActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <receiver android:name=".NavigatorWidget" android:label="Grid" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/navigator_widget" />
+        </receiver>
+        <receiver android:name=".SquareWidget" android:label="Grid · square" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/square_widget" />
+        </receiver>
+        <receiver android:name=".WideWidget" android:label="Grid · wide" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/wide_widget" />
+        </receiver>
+        <receiver android:name=".LeftThumbWidget" android:label="Left thumb" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/left_thumb_widget" />
+        </receiver>
+        <receiver android:name=".RightThumbWidget" android:label="Right thumb" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/right_thumb_widget" />
+        </receiver>
+        <receiver android:name=".HorizontalWidget" android:label="Grid · horizontal strip" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/horizontal_widget" />
+        </receiver>
+        <receiver android:name=".VerticalWidget" android:label="Grid · vertical strip" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/vertical_widget" />
+        </receiver>
+        <receiver android:name=".ThumbWidget" android:label="Thumb icon selector" android:exported="false">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/thumb_widget" />
+        </receiver>
+        <receiver android:name=".PinReceiver" android:exported="false" />
+    </application>
+</manifest>

@@ -1,0 +1,86 @@
+{
+  "source": "Isolated AOSP Android 15 emulator; no phone data or imported images",
+  "appVersion": "0.6.4",
+  "apps": [
+    {
+      "component": "com.android.dialer\/.main.impl.MainActivity",
+      "label": "Phone",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.messaging\/.ui.conversationlist.ConversationListActivity",
+      "label": "Messages",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.camera2\/com.android.camera.CameraLauncher",
+      "label": "Camera",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.gallery3d\/.app.GalleryActivity",
+      "label": "Gallery",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.deskclock\/.DeskClock",
+      "label": "Clock",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.calendar\/.AllInOneActivity",
+      "label": "Calendar",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.contacts\/.activities.PeopleActivity",
+      "label": "Contacts",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.documentsui\/.LauncherActivity",
+      "label": "Files",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "org.fossify.math\/.activities.SplashActivity.Green",
+      "label": "Calculator",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "org.fossify.notes\/.activities.SplashActivity.Green",
+      "label": "Notes",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "org.fossify.musicplayer\/.activities.SplashActivity.Green",
+      "label": "Music",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "org.fossify.voicerecorder\/.activities.SplashActivity.Green",
+      "label": "Recorder",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.settings\/.Settings",
+      "label": "Settings",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "com.android.quicksearchbox\/.SearchActivity",
+      "label": "Search",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "org.chromium.webview_shell\/.WebViewBrowserActivity",
+      "label": "Browser",
+      "artwork": "PackageManager original icon"
+    },
+    {
+      "component": "dev.iconnavigator\/.EditorActivity",
+      "label": "Icon Navigator",
+      "artwork": "PackageManager original icon"
+    }
+  ]
+}

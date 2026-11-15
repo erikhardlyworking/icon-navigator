@@ -1,0 +1,28 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'dev.iconnavigator'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'dev.iconnavigator'
+        minSdk 31
+        targetSdk 36
+        versionCode 12
+        versionName '0.6.4'
+        testInstrumentationRunner providers.gradleProperty('playScreenshotRunner')
+                .orElse('androidx.test.runner.AndroidJUnitRunner').get()
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+}
