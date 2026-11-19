@@ -8,5 +8,5 @@
     <string name="developer_page_url" translatable="false">https://play.google.com/store/apps/dev?id=6256987868491351341</string>
     <string name="widget_description">Launch apps in a grid, a row, or a column.</string>
     <string name="thumb_description">Custom thumb layers, mirrored for either hand.</string>
-    <string name="configure">Choose apps</string>
+    <string name="configure">Long-press for settings</string>
 </resources>

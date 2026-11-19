@@ -59,9 +59,9 @@ Custom icon artwork keeps its aspect ratio. Imported background photos are cente
 
 ## Launch and update
 
-Every foreground app icon on a saved widget opens its assigned activity directly. Decorative backgrounds have no actions. Use the top widget selector to edit another instance; each keeps independent settings.
+Every foreground app icon on a saved widget opens its assigned activity directly. Tapping blank widget space does nothing. **Long-press the widget and choose its settings/configuration action** to edit it; the menu label depends on your launcher. Empty widgets show **Long-press for settings** and ignore normal taps too. Use the top widget selector to edit another instance; each keeps independent settings.
 
-Version 0.6.5 retains older widget bindings, counts, handedness, artwork, and assignments. Missing layer scales become 100%. Older label settings remain explicit overrides, and absent grip controls retain the previous corner position and spacing. Old page settings are ignored. Removed experimental shapes still migrate to Grid. An ordinary compatible update preserves data.
+Version 0.6.6 retains older widget bindings, counts, handedness, artwork, and assignments. Missing layer scales become 100%. Older label settings remain explicit overrides, and absent grip controls retain the previous corner position and spacing. Old page settings are ignored. Removed experimental shapes still migrate to Grid. An ordinary compatible update preserves data.
 
 Open **Privacy & support** at the bottom of Visual options to read the offline policy or open the policy link and **More apps by this developer** in another app. The developer button prefers Google Play and falls back to a browser; there is no email button. App Grid & Thumb Select Widget works without an account, ads, analytics, or internet permission.
 

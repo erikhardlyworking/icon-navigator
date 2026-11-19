@@ -14,7 +14,7 @@ Grip adjustments update the live preview and saved widget together. **Thumb reac
 
 The default background is transparent with **zero outer padding**. Presets are editable; Advanced settings expands and scrolls to reveal extra controls, including icon opacity, custom text color, and label shadows.
 
-Save from any view once at least one app is selected and all selected apps fit the configured positions. Settings warn about overflow and explain automatic icon shrinking. Every foreground widget icon directly launches its assigned app. Widgets never show pagination. Thumb layouts fit spacing and icon sizes to the actual bounds without dropping icons.
+Save from any view once at least one app is selected and all selected apps fit the configured positions. Settings warn about overflow and explain automatic icon shrinking. Every foreground widget icon directly launches its assigned app. Blank widget space ignores taps; long-press the widget for settings. Widgets never show pagination. Thumb layouts fit spacing and icon sizes to the actual bounds without dropping icons.
 
 [User guide](docs/user-guide.md) · [Product specification](docs/product-spec.md) · [Architecture](docs/architecture.md) · [Thumb simulations](docs/thumb-layout-study.md) · [Validation](docs/testing.md)
 
@@ -27,7 +27,7 @@ Use JDK 17 and Android SDK Platform 36 (Build Tools 35.0.0), with `ANDROID_HOME`
 adb -s YOUR_DEVICE_SERIAL install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Version **0.6.5**, version code **13**, target SDK **36**. APK: `app/build/outputs/apk/debug/app-debug.apk`. The wrapper verifies its Gradle distribution checksum.
+Version **0.6.6**, version code **14**, target SDK **36**. APK: `app/build/outputs/apk/debug/app-debug.apk`. The wrapper verifies its Gradle distribution checksum.
 
 Fresh thumb widgets start with custom inner/outer reach **34/95%**, center height **17%**, requested icon size **47 dp**, and layer scales **150/121/105/100%**. Pick your own apps; none are preselected. Existing widgets and saved drafts retain their settings. Grid keeps its transparent, label-free 3 × 4 default.
 

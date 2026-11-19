@@ -51,18 +51,19 @@ public class NavigatorWidget extends AppWidgetProvider {
         } else manager.updateAppWidget(id, new RemoteViews(variants));
     }
     static RemoteViews render(Context context, int id, WidgetConfig config, int page, float width, float height) {
-        RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget);
+        RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget_content);
         root.setInt(R.id.widget_root, "setBackgroundColor", android.graphics.Color.TRANSPARENT);
+        // Hosts may reapply onto a view carrying listeners from an older version.
+        // Clear actions while absorbing blank taps, so they cannot reach a host's
+        // configuration click listener. The host still owns long-press settings.
+        for (int target : new int[]{R.id.widget_root, R.id.backdrop, R.id.widget_icons, R.id.empty}) {
+            root.setOnClickPendingIntent(target, null);
+        }
         root.removeAllViews(R.id.widget_icons);
         var frame = LayoutEngine.frame(config, width, height, page);
         boolean empty = config.icons.isEmpty();
         root.setViewVisibility(R.id.empty, empty ? View.VISIBLE : View.GONE);
-        root.setTextViewText(R.id.empty, "Choose apps");
-        if (empty) {
-            Intent edit = new Intent(context, EditorActivity.class).putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
-            root.setOnClickPendingIntent(R.id.empty, PendingIntent.getActivity(context, id, edit,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
-        }
+        root.setTextViewText(R.id.empty, context.getString(R.string.configure));
         List<LayoutEngine.Placement> placements = frame.placements();
         IconRenderer renderer = new IconRenderer(context);
         var metrics = context.getResources().getDisplayMetrics();

@@ -46,6 +46,10 @@ public class WidgetIntegrationTest {
                 assertTrue(manager.bindAppWidgetIdIfAllowed(id, WidgetProviders.component(context(), type)));
                 instrumentation().getUiAutomation().dropShellPermissionIdentity();
                 assertTrue(NavigatorWidget.owns(context(), id)); assertEquals(type, WidgetProviders.type(context(), id));
+                var provider = manager.getAppWidgetInfo(id);
+                assertNotNull(provider.configure);
+                assertEquals(new ComponentName(context(), EditorActivity.class), provider.configure);
+                assertTrue((provider.widgetFeatures & AppWidgetProviderInfo.WIDGET_FEATURE_RECONFIGURABLE) != 0);
                 store.save(id, fixture(WidgetConfig.Type.GRID_COMPACT, 18));
                 assertEquals(type, WidgetProviders.load(context(), id).type);
                 Bundle options = new Bundle();
@@ -95,6 +99,60 @@ public class WidgetIntegrationTest {
             assertFalse(bitmap.isMutable());
             c.icons.clear(); NavigatorWidget.render(context(), 123, c, 0, 220, 280).reapply(context(), view);
             assertEquals(0, icons.getChildCount()); assertEquals(View.VISIBLE, view.findViewById(R.id.empty).getVisibility());
+        });
+    }
+    @Test public void blankWidgetAreasNeverOpenSettingsAfterFreshInflationOrReapply() throws Throwable {
+        onMain(() -> {
+            int[] backgroundTargets = {R.id.widget_root, R.id.backdrop, R.id.widget_icons, R.id.empty};
+            var edit = android.app.PendingIntent.getActivity(context(), 84006,
+                    new Intent(context(), EditorActivity.class), android.app.PendingIntent.FLAG_IMMUTABLE);
+            for (var type : WidgetConfig.Type.values())
+            for (int[] size : new int[][]{{80,120},{400,64},{64,400},{440,500}})
+            for (int count : new int[]{0,1,23,400}) {
+                var config = fixture(type, count);
+                var remote = NavigatorWidget.render(context(), 123, config, 0, size[0], size[1]);
+                var view = remote.apply(context(), new FrameLayout(context()));
+                for (int target : backgroundTargets) {
+                    assertFalse(view.findViewById(target).hasOnClickListeners());
+                    assertTrue(view.findViewById(target).isClickable());
+                    assertEquals(View.IMPORTANT_FOR_ACCESSIBILITY_NO, view.findViewById(target).getImportantForAccessibility());
+                    assertFalse(view.findViewById(target).performClick());
+                }
+                // Reproduce a launcher retaining the old configuration click actions.
+                var legacy = new RemoteViews(context().getPackageName(), remote.getLayoutId());
+                for (int target : backgroundTargets) legacy.setOnClickPendingIntent(target, edit);
+                legacy.reapply(context(), view);
+                for (int target : backgroundTargets) assertTrue(view.findViewById(target).hasOnClickListeners());
+                remote.reapply(context(), view);
+                for (int target : backgroundTargets) {
+                    assertFalse(view.findViewById(target).hasOnClickListeners());
+                    assertTrue(view.findViewById(target).isClickable());
+                    assertEquals(View.IMPORTANT_FOR_ACCESSIBILITY_NO, view.findViewById(target).getImportantForAccessibility());
+                    assertFalse(view.findViewById(target).performClick());
+                }
+                FrameLayout icons = view.findViewById(R.id.widget_icons);
+                assertEquals(Math.min(count, config.capacity()), icons.getChildCount());
+                for (int i = 0; i < icons.getChildCount(); i++) {
+                    assertTrue(icons.getChildAt(i).hasOnClickListeners());
+                    assertTrue(icons.getChildAt(i).isImportantForAccessibility());
+                }
+                if (count == 0) assertEquals("Long-press for settings", ((TextView) view.findViewById(R.id.empty)).getText());
+                if (count <= 1) {
+                    // Bottom-right is empty for these sparse fixtures. It must
+                    // consume the gesture without bubbling into host configuration.
+                    float density = context().getResources().getDisplayMetrics().density;
+                    int width = Math.round(size[0] * density), height = Math.round(size[1] * density);
+                    view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+                            View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
+                    view.layout(0, 0, width, height);
+                    long time = android.os.SystemClock.uptimeMillis();
+                    var down = android.view.MotionEvent.obtain(time, time, android.view.MotionEvent.ACTION_DOWN, width-1, height-1, 0);
+                    var up = android.view.MotionEvent.obtain(time, time+20, android.view.MotionEvent.ACTION_UP, width-1, height-1, 0);
+                    try { assertTrue(view.dispatchTouchEvent(down)); assertTrue(view.dispatchTouchEvent(up)); }
+                    finally { down.recycle(); up.recycle(); }
+                }
+            }
+            edit.cancel();
         });
     }
     @Test public void resizedWidgetsKeepEveryTargetInsideTheirActualBounds() throws Throwable {

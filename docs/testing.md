@@ -1,18 +1,19 @@
-# Validation — version 0.6.5
+# Validation — version 0.6.6
 
-Verified on 2026-11-15 using JDK 17, Gradle 8.14, Android SDK 36, and isolated Android 15 / API 35 emulator **emulator-5580** (1080 × 1920, 420 dpi). Version code **13**.
+Verified on 2026-11-19 using JDK 17, Gradle 8.14, Android SDK 36, and isolated Android 15 / API 35 emulator **emulator-5580** (1080 × 1920, 420 dpi). Version code **14**.
 
 | Check | Result |
 | --- | --- |
 | Debug APK and Android test APK builds | Passed |
 | JVM unit tests | 29 passed |
-| Android integration/UI tests | 28 passed |
-| Android lint | 0 errors, 12 warnings |
+| Android integration/UI tests | 29 passed |
+| Android lint | 0 errors, 14 warnings |
 | Public name and developer link | 30-character title matches launcher/editor/Play copy; email button removed; actual developer-button click opens correct ID in emulator browser fallback |
 | Two offered entries and six compatibility entries | Eight providers bound; only Grid/Thumb lack hide_from_picker |
 | Inner/outer reach | Independent radial endpoints; ordered controls; preview, preset, recreation and Save persistence; schema 6 keeps Fit widget |
 | Saved handedness and grip | Left/right, center height, layer spacing, and edge inset round-trip independently |
 | Icon-label dropdown | Follow defaults / Yes / No preview and persist without changing the stored default |
+| Widget settings taps | Blank and empty areas absorb taps without opening configuration; all eight providers retain native long-press configuration metadata |
 | Pagination | No control views or navigation actions, including old overflow/page requests |
 | Fresh thumb profile | Center 17%, custom inner/outer 34/95%, scales 150/121/105/100%, 2/5/7/9 positions, no apps preselected; saved profiles retained |
 | Independent layer scales | Individual overrides win; automatic fitting preserves relative sizes |
@@ -34,6 +35,12 @@ Verified on 2026-11-15 using JDK 17, Gradle 8.14, Android SDK 36, and isolated A
 The [thumb study](thumb-layout-study.md), [sizing figure](simulations/thumb-layouts.png), [grip comparison](simulations/thumb-grips.png), and their CSV exports use production geometry. The figure compares sparse and full selections on compact widgets, with no navigation strip or required minimum footprint.
 
 Custom reach adds **360 range/grip/size/count/label cases**, each mirrored, and **18 one-to-six-layer cases** with up to 96 assigned apps and individual sizes. Endpoint tests verify first/last radii move independently instead of refilling the widget. Resizing preserves angles and size ratios. Bounds, collisions, ordering and assignment retention are checked. Renderer comparisons cover both modes for all three current/compatibility Thumb providers. The new UI test edits both endpoints, checks the real preview, applies a preset, recreates the Activity and saves; version 6 migration stays in Fit widget.
+
+## Blank-space taps and cached views
+
+The new regression covers **128 cases**: all eight providers, four small/wide/tall/large dimensions, and 0/1/23/400 selected apps. It checks fresh rendering and reapplying over simulated legacy configuration click actions. Root, backdrop, icon container and empty hint have no click actions; background accessibility focus is excluded and foreground icons retain their launch listeners and accessible labels. **64 sparse/empty cases** also dispatch real down/up gestures in blank space and verify that the widget consumes them, preventing a launcher container from handling them as configuration taps. Empty widgets display Long-press for settings. Binding tests verify the configure Activity and reconfigurable feature on all eight providers.
+
+A new content-layout identity forces cached hosts to inflate the corrected background accessibility attributes once on upgrade; the provider's original initial-layout resource remains as an alias. The integration suite verifies the new layout and subsequent reuse. Launcher-owned long-press menu wording/behavior still varies by host.
 
 ## Editor coverage
 
@@ -58,11 +65,13 @@ Use an explicit isolated emulator serial, never the user's phone. Binding tests 
 
 A Samsung **SM-S938B**, Android 17 / API 37, received **0.6.5 (13)** on **2026-11-15** through an authorized compatible `adb -s PHONE_SERIAL install -r`. Installation succeeded and package version verification confirmed 0.6.5 (13). App data, preferences and existing widget configurations were preserved. Automated suites and capture configurations stayed on the isolated emulator. This is installation verification, not a complete API 37 UI test pass.
 
+On **2026-11-19**, the same phone received **0.6.6 (14)** using a matching debug certificate and `install -r`. Installed version verification succeeded; app data and widget configurations were preserved. All automated interaction and migration checks ran only on emulator-5580.
+
 There is no large fixed thumb minimum. The new entry requests 2 × 3 launcher cells with a 40 dp minimum resize hint; geometry fits all nonempty configurations to actual bounds. Small widgets can have small icons/targets, and labels hide below 34 dp. Actual comfort, Samsung placement/resizing behavior, Android 12, large fonts, TalkBack, other launchers, custom artwork providers, and large-collection performance on physical devices still need hands-on coverage. Launcher insets and whether the launcher honors hide_from_picker are host-controlled.
 
-The 12 lint warnings concern Gradle version, API 33 Back manifest opt-in on min 31, custom-view construction/draw allocation, unused/obsolete icon resources, English programmatic strings and intentional physical left/right placement. There are no lint errors. A narrow GestureBackNavigation suppression keeps only the API 31/32 onBackPressed fallback; API 33+ uses the framework dispatcher. No production dependency was added.
+The 14 lint warnings concern Gradle/test dependency versions, API 33 Back manifest opt-in on min 31, custom-view construction/draw allocation, unused/obsolete icon resources, English programmatic strings and intentional physical left/right placement. There are no lint errors. A narrow GestureBackNavigation suppression keeps only the API 31/32 onBackPressed fallback; API 33+ uses the framework dispatcher. No production dependency was added.
 
-The required four Gradle checks and release bundle build passed for 0.6.5. All **29 JVM** and **28 Android** tests passed. A previous 0.6.3 run observed an existing transient resize-callback assertion; its full repeat passed. Current integration coverage is on API 35, with target SDK 36; a full API 36/37 runtime suite and Play's pre-launch report remain release-stage checks.
+The required four Gradle checks passed for 0.6.6. All **29 JVM** and **29 Android** tests passed. The signed Play release materials and screenshots remain the separately prepared 0.6.5 snapshot; populated widget/editor appearance is unchanged by this interaction fix. A previous 0.6.3 run observed an existing transient resize-callback assertion; its full repeat passed. Current integration coverage is on API 35, with target SDK 36; a full API 36/37 runtime suite and Play's pre-launch report remain release-stage checks.
 
 The renamed Privacy & support screen was also opened on the isolated emulator. Its visible buttons are Read policy online, More apps by this developer and Back to settings; no email button remains. Clicking More apps launched the HTTPS developer URL with ID **6256987868491351341** in the emulator's browser, exercising the fallback when Google Play is unavailable. The URL matches both the publisher link in the public Rainline listing and the existing tide app. Play Store routing itself still needs a store-equipped device check. Public and offline policy content were compared after the rename.
 

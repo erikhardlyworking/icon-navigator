@@ -1,4 +1,4 @@
-# Architecture — version 0.6.5
+# Architecture — version 0.6.6
 
 Native Java 17, framework Activities/Views and RemoteViews. Min SDK 31; compile/target SDK 36. AGP 8.11.1, Gradle 8.14, no production libraries. JUnit/AndroidX dependencies are test-only. Scoped launcher queries find current-profile apps; document-picker images are copied into private storage.
 
@@ -36,15 +36,17 @@ Basic settings contains only its heading and labeled controls: family for new dr
 
 ## Rendering
 
-RemoteViews contain only backdrop, foreground icon container, and empty target. Pagination XML and navigation PendingIntents are removed. There is no reserved control strip or column, and no preview swipe navigation. Legacy PAGE broadcasts have no navigation handler.
+RemoteViews contain only backdrop, foreground icon container, and a noninteractive empty-state hint. Pagination XML and navigation PendingIntents are removed. There is no reserved control strip or column, and no preview swipe navigation. Legacy PAGE broadcasts have no navigation handler.
 
-Each foreground ImageView launches its assigned activity with an explicit activity PendingIntent. Backdrops have no listener. Only an empty selection offers Choose apps. Small nonempty widgets retain all configured foreground app targets. Up to four host-supplied sizes receive responsive snapshots; each uses the same assignment counts/order and arc pattern, with spacing and artwork fitted to its dimensions.
+Each foreground ImageView launches its assigned activity with an explicit activity PendingIntent. Every render explicitly clears click PendingIntents from the root, backdrop, foreground container and empty-state view, including views retained by a launcher's RemoteViews reapply. The cleared surfaces absorb normal taps without an action, preventing a launcher container click from opening configuration. Decorative root/container nodes are excluded from accessibility focus while foreground icon nodes remain accessible. No widget tap opens configuration. An empty selection shows **Long-press for settings** without a listener. All providers retain their configure Activity and reconfigurable feature for the launcher's long-press menu. Small nonempty widgets retain all configured foreground app targets. Up to four host-supplied sizes receive responsive snapshots; each uses the same assignment counts/order and arc pattern, with spacing and artwork fitted to its dimensions.
 
 IconRenderer preserves source proportions with 64/128/256/512-pixel source buckets, filtered sampling, FIT_CENTER tiles, and a 12 MiB byte-accounted LRU cache. A responsive variant reserves at most one quarter-screen of pixels, capped at 600,000: 65% for foreground, 25% for backdrop, 10% headroom. Bitmaps use `asShared()` to avoid inline Binder pixel copies. Across four variants the budget stays below Android's 1.5-screen widget limit. [Widget bitmap limit](https://developer.android.com/reference/android/appwidget/AppWidgetManager#updateAppWidget(int[],%20android.widget.RemoteViews)).
 
 Labels, gradients, image overlays, wash/collage, borders, and appearance presets retain the previous rendering boundaries. Foreground color effects do not recolor user-selected photos/gradients. The launcher owns placement, physical dimensions, and home-screen gestures.
 
 ## Privacy, Back navigation and release separation
+
+The renderer uses a new `widget_content` layout identity, retaining `widget` as the provider's initial-layout alias. Hosts reinflate the old cached layout once on upgrade, applying the background accessibility exclusions. Subsequent updates clear legacy actions through normal RemoteViews reapplication. The root, backdrop, foreground container and empty hint stay out of accessibility focus; assigned app icons remain accessible.
 
 The manifest requests no permissions, including INTERNET. Cloud/device-transfer backup is disabled. PrivacyActivity displays a packaged offline policy and optional external browser/Google Play links, accessible from Visual options. The public Markdown policy supplies the same content. The adaptive launcher icon has a monochrome resource for Android 13+. Manifest/editor branding uses the app_name resource, App Grid & Thumb Select Widget. More apps by this developer uses the verified Google Play developer page (6256987868491351341), tries com.android.vending first, then retries the HTTPS link without a package for browser handling. No email action remains; app/package/provider identities remain unchanged.
 

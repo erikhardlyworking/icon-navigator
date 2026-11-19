@@ -1,8 +1,12 @@
-# Product specification — version 0.6.5
+# Product specification — version 0.6.6
 
-## Current request, 2026-11-15
+## Current request, 2026-11-19
 
 Offer **Grid** and **Thumb icon selector**. Grid rows and columns can form a strip. A thumb widget can switch between right and left in settings. Never show pagination on the widget. Fit spacing and artwork to the actual dimensions; settings warn about assignment overflow or small icons. This supersedes the seven-entry picker and adaptive thumb capacity in version 0.4.1.
+
+## Widget taps and settings
+
+Only assigned foreground app targets respond to a normal tap. Blank widget space, decorative backgrounds and empty widgets do not open configuration. An empty widget shows **Long-press for settings** as a noninteractive hint. Configure an existing home-screen widget through the launcher's long-press menu. Keep the configure Activity and reconfigurable metadata on all eight providers. Updates explicitly remove old configuration click actions from reused background/container/empty views and absorb blank taps instead of forwarding them to a host click action, without changing app targets or saved settings.
 
 ## Name and external links
 

@@ -1,6 +1,6 @@
 # Project guidance
 
-## Current product direction (2026-11-15)
+## Current product direction (2026-11-19)
 
 Read `docs/product-spec.md` and `docs/architecture.md` before changing interactions or rendering. The editor has freely accessible **Basic settings**, **Select apps**, and **Visual options** views. Keep the live preview visible in every view and preserve app edits, drafts, and scroll positions across navigation and Activity recreation. Saving requires at least one app and enough configured positions for every selected app. Thumb icons adapt to the actual dimensions; shrinking is not a Save error.
 
@@ -23,6 +23,7 @@ Offer exactly two new widget entries: **Grid** and **Thumb icon selector**. Grid
 - Mirror left/right exactly. Prefer symmetric angular anchors shared across adjacent layers. Simulations establish geometry, not ergonomic suitability for every hand.
 - Put independent **Layer N icon scale (%)** controls in Visual options. Layer scales and individual overrides retain their relative sizes under automatic fitting; capacity and assignment order must not change. Preserve layer scales, counts, handedness, apps, order, imported artwork, and individual size overrides when applying appearance presets.
 - Every foreground app icon directly launches its assigned activity. No navigator/trampoline Activity. Decorative overlays have no actions.
+- Tapping blank widget space or an empty widget must never open settings. Clear legacy configuration click actions on all background/container/empty views when reapplying RemoteViews; absorb blank taps so they cannot reach a launcher configuration click action. An empty widget shows a noninteractive **Long-press for settings** hint. Keep every provider reconfigurable through the launcher's long-press menu.
 - Each package can appear once per widget, including aliases. Prevent duplicates and retain the first occurrence, identity, artwork, label, and order during migration.
 - Drag reorder belongs in the actual Select apps preview, with labeled list alternatives. Defer rebuilding until after its touch callback finishes.
 - Keep every preset-controlled value editable. Advanced settings expands inline and scrolls new controls into view without hiding the preview. Icon opacity, text color, label shadow, and backgrounds remain optional.

@@ -1,0 +1,5 @@
+<resources>
+    <!-- Keep the provider's initial-layout identity, while the new content ID
+         makes hosts reinflate cached widgets and apply background accessibility. -->
+    <item name="widget" type="layout">@layout/widget_content</item>
+</resources>
