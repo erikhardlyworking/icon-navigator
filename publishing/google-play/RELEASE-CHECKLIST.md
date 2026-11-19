@@ -1,6 +1,6 @@
-# First Google Play release
+# Google Play release — 0.6.6
 
-Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on **15 November 2026**. Package **dev.iconnavigator**, version **0.6.5 (13)**, Android 12+ (min 31), target **36**. These are upload materials; no Play Console release has been submitted.
+Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on **19 November 2026**. Package **dev.iconnavigator**, version **0.6.6 (14)**, Android 12+ (min 31), target **36**. These are upload materials; this rebuild does not upload or submit a Play Console release.
 
 ## Files to upload
 
@@ -12,8 +12,9 @@ Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on *
 | Release notes | `listing/en-US/release-notes.txt` |
 | App icon | `graphics/app-icon-512.png` — 512 × 512 RGBA PNG |
 | Feature graphic | `graphics/feature-graphic-1024x500.png` — 1024 × 500 RGB PNG |
-| Phone screenshots | All eight `phone/*.png`, in numbered order — 1080 × 1920 RGB |
-| App bundle | `release/icon-navigator-0.6.5.aab` — signed with the private upload key |
+| Phone screenshots | All eight `phone/*.png`, in numbered order — five 1440 × 2560 and three 1440 × 3120 RGB captures |
+| Screenshot alt text | `listing/en-US/screenshot-alt-text.txt`, matched by filename |
+| App bundle | `release/icon-navigator-0.6.6.aab` — signed with the existing private upload key |
 | Upload certificate, if requested | `release/upload-certificate.pem` — public certificate only |
 | Category | App → Personalization |
 | Developer | Hardly Working |
@@ -27,8 +28,8 @@ Prepared for **Hardly Working**, support **workinghardlyforyou@gmail.com**, on *
 ## Before submitting
 
 1. The prepared public source and `PRIVACY.md` have been published; see `PUBLICATION.md`. Before submission, open the privacy URL while signed out and confirm it still renders as a readable webpage. The app also includes the full offline policy under Visual options → Privacy & support.
-2. Create the app in Play Console with default language English (United States). Choose **free or paid**, distribution countries and intended age groups. These are publisher decisions and have not been guessed. Complete account identity, contact, trader and payment declarations as applicable.
-3. Use Google Play App Signing. For this first release, choose Google's generated **app signing key**; the provided bundle is signed with a separate **upload key**. Supply its public certificate if the Console requests it. Never upload the private key or password to GitHub or attach them to the store listing.
+2. If the app listing has not been created, create it in Play Console with default language English (United States). Choose **free or paid**, distribution countries and intended age groups. These are publisher decisions and have not been guessed. Complete account identity, contact, trader and payment declarations as applicable. For an existing listing, retain its identity and signing setup.
+3. Use Google Play App Signing. For a first release, choose Google's generated **app signing key**; the provided bundle is signed with a separate **upload key**. For an existing listing, keep its current signing configuration. This rebuild retains the original upload key. Supply its public certificate if the Console requests it. Never upload the private key or password to GitHub or attach them to the store listing.
 4. Upload the AAB to **internal testing** first. Use the supplied descriptions and graphic files. Check the device catalog, automated pre-launch report and the real widget workflow on the Play-delivered build. The bundle targets API 36, meeting the current new-app target requirement. [Target API rules](https://support.google.com/googleplay/android-developer/answer/11926878).
 5. Complete App content using `APP-CONTENT.md`. Submit the actual IARC questionnaire to obtain a rating; no rating is preassigned here. Preview the listing and confirm original sample app icons are appropriate for the listing.
 6. Complete any testing gate shown for your account. Personal developer accounts created after 13 November 2023 generally require **12 testers opted into a closed test continuously for 14 days**, followed by an application for production access. This is separate from automated tests. [Google's account testing requirements](https://support.google.com/googleplay/android-developer/answer/14151465).

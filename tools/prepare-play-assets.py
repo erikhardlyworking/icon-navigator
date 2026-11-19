@@ -77,7 +77,7 @@ tiles=[]
 for i,p in enumerate(points):
     size=p['size']*.94
     x,y=p['x']-size/2,p['y']-size/2
-    color=['#b9f97b','#d7f5b9','#7bc9af','#b2c7e6'][i%4]
+    color=['#b9f97b','#70d6d4','#afa5ff','#ffaaa0'][i%4]
     r=size*.16
     tiles.append(f'<g transform="translate({x:.3f} {y:.3f})"><rect width="{size:.3f}" height="{size:.3f}" rx="{r:.3f}" fill="{color}"/>')
     center=size/2
@@ -95,8 +95,8 @@ for i,p in enumerate(points):
     tiles.append('</g>')
 
 feature='''<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
-<defs><radialGradient id="glow"><stop stop-color="#274638"/><stop offset="1" stop-color="#101510"/></radialGradient></defs>
-<rect width="1024" height="500" fill="#101510"/>
+<defs><radialGradient id="glow"><stop stop-color="#154d5c"/><stop offset="1" stop-color="#101426"/></radialGradient></defs>
+<rect width="1024" height="500" fill="#101426"/>
 <ellipse cx="805" cy="270" rx="380" ry="335" fill="url(#glow)"/>
 <g font-family="Liberation Sans, sans-serif">
 <text x="64" y="83" fill="#b9f97b" font-size="20" font-weight="700" letter-spacing="1">APP GRID &amp; THUMB SELECT WIDGET</text>
@@ -133,16 +133,15 @@ PREVIEW AS YOU EDIT
 Basic settings, Select apps and Visual options are freely accessible. The live preview stays visible. Add, remove and reorder apps, including by dragging in the preview, then save when your selection fits the configured positions.
 
 EVERY ICON OPENS ITS APP
-Tap a widget icon to launch its assigned activity directly. Icons fit the available widget size without adding pages or pagination. Settings explain when a selection needs more positions or when icons shrink to fit.
+Tap a widget icon to launch its assigned activity directly. Blank space ignores taps; touch and hold the widget to open its launcher settings. Icons fit the available widget size without adding pages or pagination. Default outer padding is zero, with adjustable spacing in Advanced settings. Settings explain when a selection needs more positions or when icons shrink to fit.
 
 LOCAL AND OFFLINE
 No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. App Grid & Thumb Select Widget does not request internet access.
 
 After installation, add Grid or Thumb icon selector from your launcher's widget picker, choose your apps, and save. Your launcher controls placement and resizing. Android 12 or newer is required. Choose a size and spacing that work for your hand and phone.'''
-notes='''First Google Play release.
-Compact grids and thumb selectors, with adjustable reach, layers, app names and visual options.
-Live preview, app selection and reorder, and an offline privacy policy.'''
-assert len(title)<=30 and len(short)<=80 and len(full)<=4000
+notes='''Configure widgets from the launcher's long-press menu. Blank-space and empty-widget taps do nothing; app icons still launch their assigned apps.
+Includes compact grids, mirrored thumb layouts, adjustable reach and layer sizes, and a live preview. Existing layouts and settings are preserved.'''
+assert len(title)<=30 and len(short)<=80 and len(full)<=4000 and len(notes)<=500
 locale=DEST/'listing/en-US';locale.mkdir(parents=True,exist_ok=True)
 for name,text in [('title.txt',title),('short-description.txt',short),('full-description.txt',full),('release-notes.txt',notes)]:
     (locale/name).write_text(text+'\n')

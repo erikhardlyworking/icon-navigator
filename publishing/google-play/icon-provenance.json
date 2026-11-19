@@ -1,64 +1,76 @@
 {
-  "source": "Isolated AOSP Android 15 emulator; no phone data or imported images",
-  "appVersion": "0.6.5",
+  "source": "Isolated Android 15 emulator; original Fossify color-variant icons, Android Settings and the app's own icon; no phone data or imported images",
+  "captureProfiles": [
+    {
+      "width": 1440,
+      "height": 2560,
+      "densityDpi": 480
+    },
+    {
+      "width": 1440,
+      "height": 3120,
+      "densityDpi": 480
+    }
+  ],
+  "appVersion": "0.6.6",
   "apps": [
     {
-      "component": "com.android.dialer\/.main.impl.MainActivity",
+      "component": "org.fossify.phone\/.activities.SplashActivity.Blue",
       "label": "Phone",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.messaging\/.ui.conversationlist.ConversationListActivity",
+      "component": "org.fossify.messages\/.activities.SplashActivity.Purple",
       "label": "Messages",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.camera2\/com.android.camera.CameraLauncher",
+      "component": "org.fossify.camera\/.activities.SplashActivity.Deep_purple",
       "label": "Camera",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.gallery3d\/.app.GalleryActivity",
+      "component": "org.fossify.gallery\/.activities.SplashActivity.Pink",
       "label": "Gallery",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.deskclock\/.DeskClock",
+      "component": "org.fossify.clock\/.activities.SplashActivity.Cyan",
       "label": "Clock",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.calendar\/.AllInOneActivity",
+      "component": "org.fossify.calendar\/.activities.SplashActivity.Deep_orange",
       "label": "Calendar",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.contacts\/.activities.PeopleActivity",
+      "component": "org.fossify.contacts\/.activities.SplashActivity.Teal",
       "label": "Contacts",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.documentsui\/.LauncherActivity",
+      "component": "org.fossify.filemanager\/.activities.SplashActivity.Amber",
       "label": "Files",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "org.fossify.math\/.activities.SplashActivity.Green",
+      "component": "org.fossify.math\/.activities.SplashActivity.Orange",
       "label": "Calculator",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "org.fossify.notes\/.activities.SplashActivity.Green",
+      "component": "org.fossify.notes\/.activities.SplashActivity.Indigo",
       "label": "Notes",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "org.fossify.musicplayer\/.activities.SplashActivity.Green",
+      "component": "org.fossify.musicplayer\/.activities.SplashActivity.Deep_orange",
       "label": "Music",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "org.fossify.voicerecorder\/.activities.SplashActivity.Green",
+      "component": "org.fossify.voicerecorder\/.activities.SplashActivity.Red",
       "label": "Recorder",
       "artwork": "PackageManager original icon"
     },
@@ -68,13 +80,13 @@
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "com.android.quicksearchbox\/.SearchActivity",
-      "label": "Search",
+      "component": "org.fossify.paint\/.activities.SplashActivity.Pink",
+      "label": "Paint",
       "artwork": "PackageManager original icon"
     },
     {
-      "component": "org.chromium.webview_shell\/.WebViewBrowserActivity",
-      "label": "Browser",
+      "component": "org.fossify.keyboard\/.activities.SplashActivity.Blue_grey",
+      "label": "Keyboard",
       "artwork": "PackageManager original icon"
     },
     {

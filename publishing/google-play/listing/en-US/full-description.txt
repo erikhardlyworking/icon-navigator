@@ -15,7 +15,7 @@ PREVIEW AS YOU EDIT
 Basic settings, Select apps and Visual options are freely accessible. The live preview stays visible. Add, remove and reorder apps, including by dragging in the preview, then save when your selection fits the configured positions.
 
 EVERY ICON OPENS ITS APP
-Tap a widget icon to launch its assigned activity directly. Icons fit the available widget size without adding pages or pagination. Settings explain when a selection needs more positions or when icons shrink to fit.
+Tap a widget icon to launch its assigned activity directly. Blank space ignores taps; touch and hold the widget to open its launcher settings. Icons fit the available widget size without adding pages or pagination. Default outer padding is zero, with adjustable spacing in Advanced settings. Settings explain when a selection needs more positions or when icons shrink to fit.
 
 LOCAL AND OFFLINE
 No account, advertising or analytics. Widget settings and selected artwork stay in private app storage. App Grid & Thumb Select Widget does not request internet access.

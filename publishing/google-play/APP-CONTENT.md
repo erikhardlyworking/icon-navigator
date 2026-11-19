@@ -1,4 +1,4 @@
-# Play Console declarations for 0.6.5
+# Play Console declarations for 0.6.6
 
 These answers follow the current source and release configuration. Review the exact questions presented in your Console; account-specific business declarations and the intended audience remain the publisher's choices.
 
@@ -33,7 +33,7 @@ All apps require an in-app and publicly accessible privacy policy, even when the
 
 ## Reviewer instructions, if requested
 
-No login or test account is needed. Long-press the Android home screen, choose Widgets → App Grid & Thumb Select Widget, and add Grid or Thumb icon selector. Select one or more installed apps, adjust Basic settings or Visual options, and save. Alternatively open App Grid & Thumb Select Widget, configure a draft, save and choose Add widget. The launcher controls placement and resizing. Tap a widget icon to launch its assigned activity directly. Thumb handedness and inner/outer reach are in Basic settings; layer icon sizes are in Visual options. The live preview remains visible throughout. Settings show overflow warnings; widgets have no pagination. Privacy & support is at the bottom of Visual options.
+No login or test account is needed. Long-press the Android home screen, choose Widgets → App Grid & Thumb Select Widget, and add Grid or Thumb icon selector. Select one or more installed apps, adjust Basic settings or Visual options, and save. Alternatively open App Grid & Thumb Select Widget, configure a draft, save and choose Add widget. The launcher controls placement and resizing. Tap a widget icon to launch its assigned activity directly. Blank widget space and empty-widget hints have no tap action; long-press the widget and select its settings/configuration action to edit it. Thumb handedness and inner/outer reach are in Basic settings; layer icon sizes are in Visual options. The live preview remains visible throughout. Settings show overflow warnings; widgets have no pagination. Privacy & support is at the bottom of Visual options.
 
 ## Code evidence
 

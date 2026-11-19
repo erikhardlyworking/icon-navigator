@@ -35,12 +35,23 @@ CAPTURES = [
     ("07-visual-options.png", "Choose original colors, grayscale, or tint"),
     ("08-layer-sizes.png", "Independent icon sizes for each layer"),
 ]
+CAPTURE_SIZES = {name: (1440, 3120 if name[:2] in {"03", "04", "05"} else 2560) for name, _ in CAPTURES}
+ALT_TEXT = [
+    "Nine colorful app icons with labels in a compact grid beside four regular home-screen shortcuts.",
+    "Twelve colorful app icons in a compact grid on a light rounded background.",
+    "Sixteen icons in a compact grid on a tall phone, beside four regular shortcuts occupying the same launcher space.",
+    "Thirteen colorful icons arranged for the right thumb at the bottom-right of a large phone, on plain black with no dock.",
+    "Twelve grayscale app icons in a left-thumb layout near the bottom-left of a tall phone.",
+    "Eight colorful app icons in one horizontal strip, with a dark background.",
+    "Visual options showing original colors, grayscale and tint choices, with a live preview.",
+    "Three independent layer-size sliders at 80%, 100% and 115%, under a live colored thumb-widget preview.",
+]
 DESCRIPTIONS = [
     "Compare four ordinary shortcuts with nine widget apps in equal 2 × 2 launcher footprints. App names are enabled on this transparent Grid.",
     "Twelve apps in a 3 × 4 grid, still using only a 2 × 2 launcher footprint. The Light preset adds an adjustable pale background with rounded corners.",
-    "Sixteen distinct apps in the same 2 × 2 launcher footprint. Rows and columns are independent of the launcher's grid.",
-    "Thirteen apps in the new default right-thumb arrangement, low on a plain black screen with no dock. A real Android widget host shows the transparent widget with independently set inner and outer reach; all artwork is original packaged app artwork.",
-    "A customized 12-app selector in the lower left. Original icons use the Grayscale option over a Forest background with a subtle border.",
+    "Sixteen distinct apps on a tall 1440 × 3120 phone, compared with four ordinary shortcuts in the same 2 × 2 launcher footprint. Rows and columns are independent of the launcher's grid.",
+    "Thirteen apps in the default right-thumb arrangement on a large 1440 × 3120 phone, low on a plain black screen with no dock. A real Android widget host shows the transparent widget with independently set inner and outer reach; all artwork is original packaged app artwork.",
+    "A customized 12-app selector in the lower left of a tall 1440 × 3120 phone. Original icons use the Grayscale option over a Forest background with a subtle border.",
     "Eight apps across one launcher row, compared with five ordinary shortcuts per row above it. A dark background, border, rounded corners, and 80% icon opacity style the strip.",
     "The actual Visual options screen shows all three icon-color choices while its live preview displays the selected gradient background.",
     "Adjust layer sizes independently: 80%, 100%, and 115%. The live preview retains all 12 apps, their order, and the actual compact widget dimensions.",
@@ -86,6 +97,13 @@ def capture(serial):
     def demo(command, *args):
         shell("am", "broadcast", "-a", "com.android.systemui.demo", "-e", "command", command, *args)
 
+    viewport = [1440, 2560]
+
+    def display(height):
+        viewport[1] = height
+        shell("wm", "size", f"1440x{height}")
+        time.sleep(1)
+
     def page(number, expected):
         shell("am", "force-stop", "com.android.launcher3")
         shell("am", "start", "-W", "-a", "android.intent.action.MAIN", "-c", "android.intent.category.HOME")
@@ -93,24 +111,30 @@ def capture(serial):
         shell("uiautomator", "dump", "/sdcard/icon-navigator-capture-window.xml")
         # Launcher3 may restore a previous page after recreation. Establish the
         # leftmost page explicitly instead of assuming Home always resets it.
+        left,right,y=str(int(viewport[0]*.1)),str(int(viewport[0]*.9)),str(int(viewport[1]*.42))
         for _ in range(5):
-            shell("input", "swipe", "100", "1000", "950", "1000", "350")
+            shell("input", "swipe", left, y, right, y, "350")
             time.sleep(0.4)
-        for _ in range(number):
-            shell("input", "swipe", "950", "1000", "100", "1000", "350")
-            time.sleep(0.7)
-        shell("uiautomator", "dump", "/sdcard/icon-navigator-capture-window.xml")
-        window = ElementTree.fromstring(shell("cat", "/sdcard/icon-navigator-capture-window.xml"))
-        if not any(node.get("content-desc") == expected and "AppWidgetHostView" in node.get("class", "")
-                   for node in window.iter("node")):
-            raise RuntimeError("Launcher did not navigate to the expected widget: " + expected)
+        # Empty pages may be removed by a fresh launcher. Find the real visible
+        # widget instead of assuming a database screen ID is a page index.
+        for _ in range(5):
+            shell("uiautomator", "dump", "/sdcard/icon-navigator-capture-window.xml")
+            window = ElementTree.fromstring(shell("cat", "/sdcard/icon-navigator-capture-window.xml"))
+            for node in window.iter("node"):
+                bounds=list(map(int,re.findall(r"\d+",node.get("bounds",""))))
+                if (node.get("content-desc")==expected and "AppWidgetHostView" in node.get("class","")
+                        and len(bounds)==4 and 0<=bounds[0]<bounds[2]<=viewport[0]):
+                    return
+            shell("input", "swipe", right, y, left, y, "350")
+            time.sleep(.7)
+        raise RuntimeError("Launcher did not reveal the expected widget: " + expected)
 
     try:
         run("./gradlew", ":app:assembleDebug", ":app:assembleDebugAndroidTest",
             "-PplayScreenshotRunner=dev.iconnavigator.PlayScreenshotInstrumentation", "--console=plain")
         adb("install", "-r", "app/build/outputs/apk/debug/app-debug.apk")
         adb("install", "-r", "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk")
-        # Original, signed release apps provide four more distinct launcher targets.
+        # Original, signed release apps supply modern, colorful launcher targets.
         # These are emulator fixtures, never production app dependencies.
         cache = Path(tempfile.gettempdir()) / "icon-navigator-play-apks"
         cache.mkdir(exist_ok=True)
@@ -122,8 +146,13 @@ def capture(serial):
             if hashlib.sha256(path.read_bytes()).hexdigest() != app["sha256"]:
                 raise RuntimeError("Sample APK checksum mismatch: " + str(path))
             adb("install", "-r", str(path))
-        shell("wm", "size", "1080x1920")
-        shell("wm", "density", "420")
+            if app.get("component"):
+                shell("pm", "enable", app["component"])
+                if not app["component"].endswith(".Green"):
+                    shell("pm", "disable", app["component"].rsplit(".",1)[0]+".Green")
+        display(2560)
+        shell("wm", "density", "480")
+        shell("cmd", "overlay", "enable-exclusive", "--category", "com.android.internal.systemui.navbar.gestural")
         for namespace, key, value in [
             ("system", "accelerometer_rotation", "0"), ("system", "user_rotation", "0"),
             ("global", "window_animation_scale", "0"), ("global", "transition_animation_scale", "0"),
@@ -141,6 +170,11 @@ def capture(serial):
         ids = json.loads(shell("cat", REMOTE + "/widget-ids.json"))
         apps = json.loads(shell("cat", REMOTE + "/icon-provenance.json"))["apps"]
         uri = "content://com.android.launcher3.settings/favorites"
+        dock = shell("content", "query", "--uri", uri, "--projection", "_id:rank", "--where", "container=-101")
+        dock_rows=sorted(((int(a),int(b)) for a,b in re.findall(r"_id=(\d+), rank=(\d+)",dock)),key=lambda row:row[1])
+        for (row_id,_), app in zip(dock_rows,[apps[0],apps[1],apps[2],apps[15],apps[7]]):
+            intent="#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;launchFlags=0x10200000;component="+app["component"]+";end"
+            shell("content","update","--uri",uri,"--where",f"_id={row_id}","--bind","itemType:i:0","--bind","title:s:"+app["label"],"--bind","intent:s:"+intent)
         all_rows = shell("content", "query", "--uri", uri, "--projection", "_id")
         next_shortcut_id = max(map(int, re.findall(r"_id=(\d+)", all_rows)), default=0) + 1
 
@@ -195,14 +229,18 @@ def capture(serial):
         shortcuts(2)
         shortcuts(3)
         page(1, "Grid")
-        for name in ["grid9", "grid12", "grid16"]:
+        for name in ["grid9", "grid12"]:
             stage(name)
+        display(3120)
+        page(1, "Grid")
+        stage("grid16")
         # An actual debug-only Android widget host permits low placement on a
         # plain black page without Launcher3 reserving a dock beneath it.
         stage("home-right")
         position("thumb", 2, 0, 3, 3, 2)
         page(2, "Thumb icon selector")
         stage("home-left")
+        display(2560)
         position("grid", 3, 0, 4, 5, 1)
         page(3, "Grid")
         stage("strip")
@@ -223,28 +261,31 @@ def capture(serial):
 
 
 def package():
-    version = json.loads((DEST / "icon-provenance.json").read_text())["appVersion"]
+    provenance = json.loads((DEST / "icon-provenance.json").read_text())
+    version = provenance["appVersion"]
     records = []
     cards = []
     hashes = set()
-    for (name, title), description in zip(CAPTURES, DESCRIPTIONS, strict=True):
+    for (name, title), description, alt_text in zip(CAPTURES, DESCRIPTIONS, ALT_TEXT, strict=True):
         path = DEST / "phone" / name
         with Image.open(path) as image:
             image.verify()
         with Image.open(path) as image:
-            if image.size != (1080, 1920) or image.mode != "RGB":
-                raise RuntimeError(f"Expected 1080 × 1920 RGB PNG: {path}")
+            if image.size != CAPTURE_SIZES[name] or image.mode != "RGB":
+                raise RuntimeError(f"Expected {CAPTURE_SIZES[name]} RGB PNG: {path}")
         checksum = hashlib.sha256(path.read_bytes()).hexdigest()
         if checksum in hashes:
             raise RuntimeError("Duplicate capture: " + name)
         hashes.add(checksum)
-        records.append({"file": "phone/" + name, "title": title, "width": 1080,
-                        "height": 1920, "format": "24-bit RGB PNG, no alpha",
-                        "description": description, "sha256": checksum})
+        records.append({"file": "phone/" + name, "title": title, "width": CAPTURE_SIZES[name][0],
+                        "height": CAPTURE_SIZES[name][1], "format": "24-bit RGB PNG, no alpha",
+                        "description": description, "altText": alt_text, "sha256": checksum})
+        assert len(alt_text)<=140
         cards.append(f'<figure><a href="phone/{name}"><img src="phone/{name}" '
-                     f'alt="{html.escape(title)}" loading="lazy"></a><figcaption>'
+                     f'alt="{html.escape(alt_text)}" loading="lazy"></a><figcaption>'
                      f'<strong>{name[:2]}. {html.escape(title)}</strong><p>{html.escape(description)}</p></figcaption></figure>')
-    (DEST / "manifest.json").write_text(json.dumps({"appVersion": version, "screenshots": records}, indent=2) + "\n")
+    (DEST / "manifest.json").write_text(json.dumps({"appVersion": version, "captureProfiles": provenance["captureProfiles"], "screenshots": records}, indent=2) + "\n")
+    (DEST / "listing/en-US/screenshot-alt-text.txt").write_text("\n\n".join(record["file"]+"\n"+record["altText"] for record in records)+"\n")
     (DEST / "index.html").write_text('''<!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>App Grid &amp; Thumb Select Widget · Google Play materials</title>
@@ -259,8 +300,9 @@ figcaption{padding:12px 0;line-height:1.5}figcaption p{font-size:14px;margin:8px
 <p>More apps in less space. Keep frequent apps close to your chosen corner.<br>
 Compare 9, 12, and 16 apps in a compact Grid, or place a Thumb selector low on the screen.</p>
 <p>Make it yours with optional labels, light or dark backgrounds, gradients, grayscale icons, borders, opacity, and independent layer sizes.</p>
-<p>Eight real app and launcher captures · version VERSION_TOKEN · 1080 × 1920 · RGB PNG.<br>
-Original packaged AOSP and Fossify icons, styled using the app’s own visual options. No phone artwork or imported icon images.</p>
+<p>Eight real app and launcher captures · version VERSION_TOKEN · RGB PNG.<br>
+Five 1440 × 2560 portraits and three tall 1440 × 3120 large-phone examples, with gesture navigation.<br>
+Modern original Fossify color-variant icons, Android Settings, and our own app icon. No phone artwork or imported icon images.</p>
 <nav><a href="graphics/app-icon-512.png">512px store icon</a><a href="graphics/feature-graphic-1024x500.png">Feature graphic</a><a href="RELEASE-CHECKLIST.md">Release checklist</a><a href="APP-CONTENT.md">App content answers</a></nav>
 <figure class="feature"><img src="graphics/feature-graphic-1024x500.png" alt="More apps. Less reaching. Original thumb-layout illustration."><figcaption>1024 × 500 feature graphic · original vector artwork</figcaption></figure>
 <h2>Phone screenshots</h2>

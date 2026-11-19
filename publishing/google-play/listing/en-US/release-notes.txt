@@ -1,3 +1,2 @@
-First Google Play release.
-Compact grids and thumb selectors, with adjustable reach, layers, app names and visual options.
-Live preview, app selection and reorder, and an offline privacy policy.
+Configure widgets from the launcher's long-press menu. Blank-space and empty-widget taps do nothing; app icons still launch their assigned apps.
+Includes compact grids, mirrored thumb layouts, adjustable reach and layer sizes, and a live preview. Existing layouts and settings are preserved.

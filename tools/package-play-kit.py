@@ -33,8 +33,13 @@ assert shots['appVersion']==version,shots['appVersion']
 assert len(shots['screenshots'])==8
 for record in shots['screenshots']:
     p=DEST/record['file']
-    with Image.open(p) as image:assert image.size==(1080,1920) and image.mode=='RGB',p
+    with Image.open(p) as image:
+        assert image.size==(record['width'],record['height']) and image.mode=='RGB',p
+        assert min(image.size)>=320 and max(image.size)<=3840 and max(image.size)/min(image.size)<=2.3,p
+    assert p.stat().st_size<=8*1024*1024,p
     assert sha(p)==record['sha256'],p
+assert sum(r['width']*16==r['height']*9 and r['width']>=1080 for r in shots['screenshots'])>=4
+assert any(r['height']>2*r['width'] for r in shots['screenshots'])
 for name,size,mode in [('app-icon-512.png',(512,512),'RGBA'),('feature-graphic-1024x500.png',(1024,500),'RGB')]:
     with Image.open(DEST/'graphics'/name) as image:assert image.size==size and image.mode==mode,name
 assert (DEST/'graphics/app-icon-512.png').stat().st_size<=1024*1024

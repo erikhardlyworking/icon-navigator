@@ -5,7 +5,9 @@
     "source": "https://github.com/FossifyOrg/Calculator/releases/tag/1.4.0",
     "filename": "calculator-10-foss-release.apk",
     "url": "https://github.com/FossifyOrg/Calculator/releases/download/1.4.0/calculator-10-foss-release.apk",
-    "sha256": "7c5443c22d6d62c67dfe80df33ea9161ff0fa440f92590bcb45d7008b57613ed"
+    "sha256": "7c5443c22d6d62c67dfe80df33ea9161ff0fa440f92590bcb45d7008b57613ed",
+    "component": "org.fossify.math/.activities.SplashActivity.Orange",
+    "colorVariant": "Orange"
   },
   {
     "repository": "https://github.com/FossifyOrg/Notes",
@@ -13,7 +15,9 @@
     "source": "https://github.com/FossifyOrg/Notes/releases/tag/1.7.0",
     "filename": "notes-13-foss-release.apk",
     "url": "https://github.com/FossifyOrg/Notes/releases/download/1.7.0/notes-13-foss-release.apk",
-    "sha256": "5a56e0e39cc488e1f3b947d3801006d3b7450ec73c67f03195c64c5fd3b6bced"
+    "sha256": "5a56e0e39cc488e1f3b947d3801006d3b7450ec73c67f03195c64c5fd3b6bced",
+    "component": "org.fossify.notes/.activities.SplashActivity.Indigo",
+    "colorVariant": "Indigo"
   },
   {
     "repository": "https://github.com/FossifyOrg/Music-Player",
@@ -21,7 +25,9 @@
     "source": "https://github.com/FossifyOrg/Music-Player/releases/tag/1.8.5",
     "filename": "musicplayer-18-foss-release.apk",
     "url": "https://github.com/FossifyOrg/Music-Player/releases/download/1.8.5/musicplayer-18-foss-release.apk",
-    "sha256": "61fdf0bb71cb3a809960e59a5872030f16c799a0c0f285115a6f40f7fa5012c0"
+    "sha256": "61fdf0bb71cb3a809960e59a5872030f16c799a0c0f285115a6f40f7fa5012c0",
+    "component": "org.fossify.musicplayer/.activities.SplashActivity.Deep_orange",
+    "colorVariant": "Deep_orange"
   },
   {
     "repository": "https://github.com/FossifyOrg/Voice-Recorder",
@@ -29,6 +35,108 @@
     "source": "https://github.com/FossifyOrg/Voice-Recorder/releases/tag/1.7.4",
     "filename": "voicerecorder-21-foss-release.apk",
     "url": "https://github.com/FossifyOrg/Voice-Recorder/releases/download/1.7.4/voicerecorder-21-foss-release.apk",
-    "sha256": "1b3efb263bd152299aada8bb6ed3cca4a340425cd755472f7d799c9e0e024cc8"
+    "sha256": "1b3efb263bd152299aada8bb6ed3cca4a340425cd755472f7d799c9e0e024cc8",
+    "component": "org.fossify.voicerecorder/.activities.SplashActivity.Red",
+    "colorVariant": "Red"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Phone",
+    "release": "1.11.1",
+    "source": "https://github.com/FossifyOrg/Phone/releases/tag/1.11.1",
+    "filename": "phone-22-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Phone/releases/download/1.11.1/phone-22-foss-release.apk",
+    "sha256": "d1ad08467034e5138a6e68f03b6e150f0bb010dfcbf490ff3d2bd4822b755728",
+    "component": "org.fossify.phone/.activities.SplashActivity.Blue",
+    "colorVariant": "Blue"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Messages",
+    "release": "1.10.2",
+    "source": "https://github.com/FossifyOrg/Messages/releases/tag/1.10.2",
+    "filename": "messages-26-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Messages/releases/download/1.10.2/messages-26-foss-release.apk",
+    "sha256": "7077dae6613d7a9d775841c4c10be16e255f8af8d5152bc84a5e6984740b56e1",
+    "component": "org.fossify.messages/.activities.SplashActivity.Purple",
+    "colorVariant": "Purple"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Camera",
+    "release": "1.5.0",
+    "source": "https://github.com/FossifyOrg/Camera/releases/tag/1.5.0",
+    "filename": "camera-11-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Camera/releases/download/1.5.0/camera-11-foss-release.apk",
+    "sha256": "116004fd8743f9e47bf25eb9c6049eb77d3f19d59506c3f47513f584c6138435",
+    "component": "org.fossify.camera/.activities.SplashActivity.Deep_purple",
+    "colorVariant": "Deep_purple"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Gallery",
+    "release": "1.14.2",
+    "source": "https://github.com/FossifyOrg/Gallery/releases/tag/1.14.2",
+    "filename": "gallery-40-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Gallery/releases/download/1.14.2/gallery-40-foss-release.apk",
+    "sha256": "ff3e6122ccf1873620e9e8e374b9c9dec4d7eb3a8f42559135bd82562c65f41f",
+    "component": "org.fossify.gallery/.activities.SplashActivity.Pink",
+    "colorVariant": "Pink"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Clock",
+    "release": "1.6.0",
+    "source": "https://github.com/FossifyOrg/Clock/releases/tag/1.6.0",
+    "filename": "clock-10-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Clock/releases/download/1.6.0/clock-10-foss-release.apk",
+    "sha256": "43cf9f0ec45f1f1ff2df47286622e5b8f3acedaeb07b7f7641b5243dbedca079",
+    "component": "org.fossify.clock/.activities.SplashActivity.Cyan",
+    "colorVariant": "Cyan"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Calendar",
+    "release": "1.12.2",
+    "source": "https://github.com/FossifyOrg/Calendar/releases/tag/1.12.2",
+    "filename": "calendar-25-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Calendar/releases/download/1.12.2/calendar-25-foss-release.apk",
+    "sha256": "2825816d0a972bd85eb289e556221293fadecfd3179a4a2531bde6f89c6f0238",
+    "component": "org.fossify.calendar/.activities.SplashActivity.Deep_orange",
+    "colorVariant": "Deep_orange"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Contacts",
+    "release": "1.6.0",
+    "source": "https://github.com/FossifyOrg/Contacts/releases/tag/1.6.0",
+    "filename": "contacts-13-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Contacts/releases/download/1.6.0/contacts-13-foss-release.apk",
+    "sha256": "6a89be96b5ec39f5e2b11bd61dc7031f4b88261b324ab13af5743fbc62f0cddb",
+    "component": "org.fossify.contacts/.activities.SplashActivity.Teal",
+    "colorVariant": "Teal"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/File-Manager",
+    "release": "1.6.4",
+    "source": "https://github.com/FossifyOrg/File-Manager/releases/tag/1.6.4",
+    "filename": "file-manager-16-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/File-Manager/releases/download/1.6.4/file-manager-16-foss-release.apk",
+    "sha256": "6e4656b8947966a2853681691bb0005e802ee89983fb141ec0f7186497dcd5f4",
+    "component": "org.fossify.filemanager/.activities.SplashActivity.Amber",
+    "colorVariant": "Amber"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Paint",
+    "release": "1.4.0",
+    "source": "https://github.com/FossifyOrg/Paint/releases/tag/1.4.0",
+    "filename": "paint-7-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Paint/releases/download/1.4.0/paint-7-foss-release.apk",
+    "sha256": "b949ad0a1eafce616e9e6c6f5fa5b265e4b8ad426303a245be921a6e0c0def5e",
+    "component": "org.fossify.paint/.activities.SplashActivity.Pink",
+    "colorVariant": "Pink"
+  },
+  {
+    "repository": "https://github.com/FossifyOrg/Keyboard",
+    "release": "1.9.1",
+    "source": "https://github.com/FossifyOrg/Keyboard/releases/tag/1.9.1",
+    "filename": "keyboard-14-foss-release.apk",
+    "url": "https://github.com/FossifyOrg/Keyboard/releases/download/1.9.1/keyboard-14-foss-release.apk",
+    "sha256": "e326885c08b68212fd9fdda9be8a4fa492d5daba7ff37bb4ff4511826f40a8d0",
+    "component": "org.fossify.keyboard/.activities.SplashActivity.Blue_grey",
+    "colorVariant": "Blue_grey"
   }
 ]

@@ -14,6 +14,8 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Point;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Build;
@@ -38,19 +40,20 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
     private Bundle args;
     private Context context;
     private File output;
+    private int screenWidth,screenHeight;
     private static final String[] APPS = {
-        "com.android.dialer/.main.impl.MainActivity", "com.android.messaging/.ui.conversationlist.ConversationListActivity",
-        "com.android.camera2/com.android.camera.CameraLauncher", "com.android.gallery3d/.app.GalleryActivity",
-        "com.android.deskclock/.DeskClock", "com.android.calendar/.AllInOneActivity",
-        "com.android.contacts/.activities.PeopleActivity", "com.android.documentsui/.LauncherActivity",
-        "org.fossify.math/.activities.SplashActivity.Green", "org.fossify.notes/.activities.SplashActivity.Green",
-        "org.fossify.musicplayer/.activities.SplashActivity.Green", "org.fossify.voicerecorder/.activities.SplashActivity.Green",
-        "com.android.settings/.Settings", "com.android.quicksearchbox/.SearchActivity",
-        "org.chromium.webview_shell/.WebViewBrowserActivity", "dev.iconnavigator/.EditorActivity"
+        "org.fossify.phone/.activities.SplashActivity.Blue", "org.fossify.messages/.activities.SplashActivity.Purple",
+        "org.fossify.camera/.activities.SplashActivity.Deep_purple", "org.fossify.gallery/.activities.SplashActivity.Pink",
+        "org.fossify.clock/.activities.SplashActivity.Cyan", "org.fossify.calendar/.activities.SplashActivity.Deep_orange",
+        "org.fossify.contacts/.activities.SplashActivity.Teal", "org.fossify.filemanager/.activities.SplashActivity.Amber",
+        "org.fossify.math/.activities.SplashActivity.Orange", "org.fossify.notes/.activities.SplashActivity.Indigo",
+        "org.fossify.musicplayer/.activities.SplashActivity.Deep_orange", "org.fossify.voicerecorder/.activities.SplashActivity.Red",
+        "com.android.settings/.Settings", "org.fossify.paint/.activities.SplashActivity.Pink",
+        "org.fossify.keyboard/.activities.SplashActivity.Blue_grey", "dev.iconnavigator/.EditorActivity"
     };
     private static final String[] LABELS = {
         "Phone", "Messages", "Camera", "Gallery", "Clock", "Calendar", "Contacts", "Files",
-        "Calculator", "Notes", "Music", "Recorder", "Settings", "Search", "Browser", "App Grid & Thumb Select Widget"
+        "Calculator", "Notes", "Music", "Recorder", "Settings", "Paint", "Keyboard", "App Grid & Thumb Select Widget"
     };
     @Override public void onCreate(Bundle arguments) { args=arguments; super.onCreate(arguments); start(); }
     @Override public void onStart() {
@@ -61,6 +64,9 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
                     || !"1".equals(shell("getprop ro.kernel.qemu").trim()))
                 throw new IllegalStateException("Screenshot capture requires explicit opt-in and an Android emulator.");
             context=getTargetContext();output=new File(context.getExternalFilesDir(null),"play-screenshots");
+            Point display=new Point();context.getSystemService(android.hardware.display.DisplayManager.class)
+                    .getDisplay(android.view.Display.DEFAULT_DISPLAY).getRealSize(display);
+            screenWidth=display.x;screenHeight=display.y;
             if (!output.exists() && !output.mkdirs()) throw new IllegalStateException("Cannot create capture output");
             var accessibility=getUiAutomation().getServiceInfo();
             accessibility.flags|=android.accessibilityservice.AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
@@ -136,12 +142,21 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
         new ConfigStore(context).save(0,config("grid12"));
         JSONArray apps=new JSONArray();
         for(int i=0;i<APPS.length;i++) apps.put(new JSONObject().put("component",APPS[i]).put("label",LABELS[i]).put("artwork","PackageManager original icon"));
-        write("icon-provenance.json",new JSONObject().put("source","Isolated AOSP Android 15 emulator; no phone data or imported images")
+        write("icon-provenance.json",new JSONObject().put("source","Isolated Android 15 emulator; original Fossify color-variant icons, Android Settings and the app's own icon; no phone data or imported images")
+                .put("captureProfiles",new JSONArray().put(new JSONObject().put("width",1440).put("height",2560).put("densityDpi",480))
+                        .put(new JSONObject().put("width",1440).put("height",3120).put("densityDpi",480)))
                 .put("appVersion",context.getPackageManager().getPackageInfo(context.getPackageName(),0).versionName).put("apps",apps).toString(2));
-        Bitmap wallpaper=Bitmap.createBitmap(1080,1920,Bitmap.Config.ARGB_8888);
+        Bitmap wallpaper=Bitmap.createBitmap(screenWidth,screenHeight,Bitmap.Config.ARGB_8888);
+        Canvas canvas=new Canvas(wallpaper);float w=screenWidth,h=screenHeight;
         Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setShader(new LinearGradient(0,0,1080,1920,Color.rgb(15,28,32),Color.rgb(42,67,53),Shader.TileMode.CLAMP));
-        new Canvas(wallpaper).drawRect(0,0,1080,1920,paint);
+        paint.setShader(new LinearGradient(0,0,w,h,0xff17152e,0xff06494c,Shader.TileMode.CLAMP));
+        canvas.drawRect(0,0,w,h,paint);
+        paint.setShader(new RadialGradient(w*.85f,h*.18f,w*.9f,new int[]{0xff503b8f,0x00503b8f},null,Shader.TileMode.CLAMP));
+        canvas.drawRect(0,0,w,h,paint);
+        paint.setShader(new RadialGradient(w*.06f,h*.62f,w*.95f,new int[]{0xff087e83,0x00087e83},null,Shader.TileMode.CLAMP));
+        canvas.drawRect(0,0,w,h,paint);
+        paint.setShader(null);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(w/500);paint.setColor(0x2458dfd0);
+        for(int i=0;i<3;i++)canvas.drawCircle(w*1.04f,h*.66f,w*(.67f+i*.1f),paint);
         getUiAutomation().adoptShellPermissionIdentity("android.permission.SET_WALLPAPER");
         try {WallpaperManager.getInstance(context).setBitmap(wallpaper,null,false,WallpaperManager.FLAG_SYSTEM);}
         finally {getUiAutomation().dropShellPermissionIdentity();wallpaper.recycle();}
@@ -232,8 +247,8 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
             throw new IllegalStateException("Expected the real launcher widget to be visible: "+label);
         if(iconCount(host)!=c.icons.size())throw new IllegalStateException("Wrong visible app count for "+kind);
         Rect bounds=new Rect();host.getBoundsInScreen(bounds);
-        if(bounds.top<1920*.4||bounds.bottom<1920*.7||bounds.height()>1920*.35
-                ||bounds.width()>1080*(kind.equals("strip")?1:family.equals("grid")?.5:.65))
+        if(bounds.top<screenHeight*.4||bounds.bottom<screenHeight*.7||bounds.height()>screenHeight*.35
+                ||bounds.width()>screenWidth*(kind.equals("strip")?1:family.equals("grid")?.5:.65))
             throw new IllegalStateException("Widget must occupy a compact lower part of the home screen: "+bounds);
         if(kind.equals("right")&&(c.opacity!=0||c.backgroundArt!=WidgetConfig.BackgroundArt.NONE
                 ||c.widgetBorder!=0||hasLauncherShortcut(getUiAutomation().getRootInActiveWindow()))) {
@@ -245,7 +260,7 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
     private boolean hasLauncherShortcut(AccessibilityNodeInfo node) {
         if(node==null)return false;
         Rect bounds=new Rect();node.getBoundsInScreen(bounds);
-        if(node.isVisibleToUser()&&bounds.intersect(0,0,1080,1920)
+        if(node.isVisibleToUser()&&bounds.intersect(0,0,screenWidth,screenHeight)
                 &&"com.android.launcher3".contentEquals(node.getPackageName()==null?"":node.getPackageName())
                 &&"android.widget.TextView".contentEquals(node.getClassName()==null?"":node.getClassName()))return true;
         for(int i=0;i<node.getChildCount();i++)if(hasLauncherShortcut(node.getChild(i)))return true;
@@ -253,7 +268,7 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
     }
     private AccessibilityNodeInfo findHost(AccessibilityNodeInfo node,String label) {
         if(node==null)return null;
-        if(node.getClassName()!=null&&node.getClassName().toString().contains("AppWidgetHostView")
+        if(node.isVisibleToUser()&&node.getClassName()!=null&&node.getClassName().toString().contains("AppWidgetHostView")
                 &&label.contentEquals(node.getContentDescription()==null?"":node.getContentDescription()))return node;
         for(int i=0;i<node.getChildCount();i++){var found=findHost(node.getChild(i),label);if(found!=null)return found;}
         return null;
@@ -308,7 +323,8 @@ public final class PlayScreenshotInstrumentation extends Instrumentation {
     }
     private void capture(String name) throws Exception {
         waitForIdleSync();Bitmap screen=getUiAutomation().takeScreenshot();
-        if(screen==null||screen.getWidth()!=1080||screen.getHeight()!=1920)throw new IllegalStateException("Expected a 1080 × 1920 capture");
+        if(screen==null||screen.getWidth()!=1440||(screen.getHeight()!=2560&&screen.getHeight()!=3120))
+            throw new IllegalStateException("Expected a 1440 × 2560 or 1440 × 3120 capture");
         // Lossless format conversion only: preserve captured UI pixels, omit the opaque alpha channel.
         Bitmap rgb=Bitmap.createBitmap(screen.getWidth(),screen.getHeight(),Bitmap.Config.ARGB_8888);rgb.setHasAlpha(false);
         new Canvas(rgb).drawBitmap(screen,0,0,null);

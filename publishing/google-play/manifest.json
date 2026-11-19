@@ -1,77 +1,97 @@
 {
-  "appVersion": "0.6.5",
+  "appVersion": "0.6.6",
+  "captureProfiles": [
+    {
+      "width": 1440,
+      "height": 2560,
+      "densityDpi": 480
+    },
+    {
+      "width": 1440,
+      "height": 3120,
+      "densityDpi": 480
+    }
+  ],
   "screenshots": [
     {
       "file": "phone/01-grid-9.png",
       "title": "9 apps with optional labels",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 2560,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Compare four ordinary shortcuts with nine widget apps in equal 2 \u00d7 2 launcher footprints. App names are enabled on this transparent Grid.",
-      "sha256": "a08fa12192aafed64d79521f719ccbeed3e65af87b7a6e99813d44f513311eef"
+      "altText": "Nine colorful app icons with labels in a compact grid beside four regular home-screen shortcuts.",
+      "sha256": "2ba2b29e7191a2e70a4552a8433534b1f11f8e7c864d021a0800eecfa9f97997"
     },
     {
       "file": "phone/02-grid-12.png",
       "title": "12 apps on a light background",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 2560,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Twelve apps in a 3 \u00d7 4 grid, still using only a 2 \u00d7 2 launcher footprint. The Light preset adds an adjustable pale background with rounded corners.",
-      "sha256": "bbd49d7b5885dd9a3920d2648470094876c6a3bf9f975929fb92641a8ed5011f"
+      "altText": "Twelve colorful app icons in a compact grid on a light rounded background.",
+      "sha256": "1fa25e677ac322e195142c7bb523b6275f65cd45e12752a034ee57b5eb08a3f4"
     },
     {
       "file": "phone/03-grid-16.png",
       "title": "16 apps where four shortcuts fit",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 3120,
       "format": "24-bit RGB PNG, no alpha",
-      "description": "Sixteen distinct apps in the same 2 \u00d7 2 launcher footprint. Rows and columns are independent of the launcher's grid.",
-      "sha256": "32a3c34e634853d45ec7769a8da650945e44d969ec366878f45375953713fbd4"
+      "description": "Sixteen distinct apps on a tall 1440 \u00d7 3120 phone, compared with four ordinary shortcuts in the same 2 \u00d7 2 launcher footprint. Rows and columns are independent of the launcher's grid.",
+      "altText": "Sixteen icons in a compact grid on a tall phone, beside four regular shortcuts occupying the same launcher space.",
+      "sha256": "ebbaee8bf7c8cc0d7dff6442a9ae11760eacd98aec3117d822bfc04e255ac153"
     },
     {
       "file": "phone/04-thumb-right.png",
       "title": "Just your apps, within your thumb\u2019s reach",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 3120,
       "format": "24-bit RGB PNG, no alpha",
-      "description": "Thirteen apps in the new default right-thumb arrangement, low on a plain black screen with no dock. A real Android widget host shows the transparent widget with independently set inner and outer reach; all artwork is original packaged app artwork.",
-      "sha256": "3ee32f88ff0ce47451e8ea1c533c4ada0161d22018af3769d0a236c8ba174945"
+      "description": "Thirteen apps in the default right-thumb arrangement on a large 1440 \u00d7 3120 phone, low on a plain black screen with no dock. A real Android widget host shows the transparent widget with independently set inner and outer reach; all artwork is original packaged app artwork.",
+      "altText": "Thirteen colorful icons arranged for the right thumb at the bottom-right of a large phone, on plain black with no dock.",
+      "sha256": "e772fb1f46a8c82f05f176e4550582d6e92603b6c9ee91218ab8c510ccd1fe43"
     },
     {
       "file": "phone/05-thumb-left.png",
       "title": "A grayscale thumb selector in the lower left",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 3120,
       "format": "24-bit RGB PNG, no alpha",
-      "description": "A customized 12-app selector in the lower left. Original icons use the Grayscale option over a Forest background with a subtle border.",
-      "sha256": "72cbc5b3eac0d2a7e0e6e3ebe508c5f52497215f513a2883747e7878b5662954"
+      "description": "A customized 12-app selector in the lower left of a tall 1440 \u00d7 3120 phone. Original icons use the Grayscale option over a Forest background with a subtle border.",
+      "altText": "Twelve grayscale app icons in a left-thumb layout near the bottom-left of a tall phone.",
+      "sha256": "c584f3c49cf259dfa2d331f1e2896bfb434b9a1953085d1e998269da954cf9c3"
     },
     {
       "file": "phone/06-grid-strip.png",
       "title": "Eight apps in a dark strip",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 2560,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Eight apps across one launcher row, compared with five ordinary shortcuts per row above it. A dark background, border, rounded corners, and 80% icon opacity style the strip.",
-      "sha256": "af0404b7753a76346f0668d3412ef2b5ff79db23cfb25122a78a3091c2c1e4fa"
+      "altText": "Eight colorful app icons in one horizontal strip, with a dark background.",
+      "sha256": "c98b8333d3a830d96df5316142f43a01d82fe80feb20b04494e503fbca7ba249"
     },
     {
       "file": "phone/07-visual-options.png",
       "title": "Choose original colors, grayscale, or tint",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 2560,
       "format": "24-bit RGB PNG, no alpha",
       "description": "The actual Visual options screen shows all three icon-color choices while its live preview displays the selected gradient background.",
-      "sha256": "b2995526a73e156823ffa7551b465271d306898554384f4be53f9acf16849443"
+      "altText": "Visual options showing original colors, grayscale and tint choices, with a live preview.",
+      "sha256": "9138575153d39cbb3bc9a07ab52cbd61ae148e6f7f983a80541c0b13f9df434c"
     },
     {
       "file": "phone/08-layer-sizes.png",
       "title": "Independent icon sizes for each layer",
-      "width": 1080,
-      "height": 1920,
+      "width": 1440,
+      "height": 2560,
       "format": "24-bit RGB PNG, no alpha",
       "description": "Adjust layer sizes independently: 80%, 100%, and 115%. The live preview retains all 12 apps, their order, and the actual compact widget dimensions.",
-      "sha256": "35aa34c1efdf2604a733692d31dbb460072db3a79a428e9e44e7d40ecb619057"
+      "altText": "Three independent layer-size sliders at 80%, 100% and 115%, under a live colored thumb-widget preview.",
+      "sha256": "72c3d418e3d1113e745ac1f2e3b4fe4889bae6b493446cf5ce088348a19f7a02"
     }
   ]
 }

@@ -1,0 +1,23 @@
+phone/01-grid-9.png
+Nine colorful app icons with labels in a compact grid beside four regular home-screen shortcuts.
+
+phone/02-grid-12.png
+Twelve colorful app icons in a compact grid on a light rounded background.
+
+phone/03-grid-16.png
+Sixteen icons in a compact grid on a tall phone, beside four regular shortcuts occupying the same launcher space.
+
+phone/04-thumb-right.png
+Thirteen colorful icons arranged for the right thumb at the bottom-right of a large phone, on plain black with no dock.
+
+phone/05-thumb-left.png
+Twelve grayscale app icons in a left-thumb layout near the bottom-left of a tall phone.
+
+phone/06-grid-strip.png
+Eight colorful app icons in one horizontal strip, with a dark background.
+
+phone/07-visual-options.png
+Visual options showing original colors, grayscale and tint choices, with a live preview.
+
+phone/08-layer-sizes.png
+Three independent layer-size sliders at 80%, 100% and 115%, under a live colored thumb-widget preview.
